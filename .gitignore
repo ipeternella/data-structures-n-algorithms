@@ -1,0 +1,6 @@
+# Ignore Emacs files
+\#*#
+*~
+
+# Java .class files
+*.class
