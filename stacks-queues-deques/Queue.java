@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 /**
  * This class consists of an implementation of a queue data structure (follows FIFO policy) 
  * which is built on the top of a singly linked list data structure.
- * This class implements the Iterable interface which uses SinglyLinkedList class.
+ * This class implements the Iterable interface which uses SinglyLinkedList class
  * iterator.
  *
  * [!] Make sure that SinglyLinkedList.java is in the same directory as this file [!]
