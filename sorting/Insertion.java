@@ -1,35 +1,41 @@
 /**
- * This is a class that implements the elementary Insertion sort.
- * All methods are based on a Comparable type to ensure that objects
- * used by these methods have the compareTo() method.
- * The methods of this class are static so no instantiation is required
- * which makes the class more suited for practical use.
- * Based on the book Algorithms by Robert Sedgewick and Kevin Wayne.
+ * This class consists of an implementation of the elementary Insertion Sort algorithm.
+ * All methods use the Comparable data type to ensure that objects used by the
+ * methods of this class have implemented the Comparable interface i.e. this class can
+ * be used to sort Integer, Double, String, etc. class types.
+ * 
+ * The sort() method of this class uses a Comparable[] array type because the O(1) 
+ * indexing of the arrays. The sort() method is implemented in ascending order.
  *
+ * The methods of this class are static so no instantiation is required
+ * which makes the class more suitable for practical use, e.g., to sort a Comparable
+ * array one could use the sort() method: 
+ *
+ *              Insertion.sort(arrayReference)
+ *
+ * Based on Algorithms (4th ed.) by Robert Sedgewick and Kevin Wayne.
+ * 
  * @author Igor G. Peternella
- * @date 06-01-2017
+ * @date 06-05-2017
  */
 
 public class Insertion {
 
     /**
      * Method that sorts a Comparable array using Insertion sort.
-     * This sorting has average time complexity O(N^2) of exchanges.
-     * This algorithm is sensitive to input. In the best case scenario
-     * there are no exchanges. It is and inplace method and requires 
-     * no extra space.
+     * Complexity: O(N^2) compares (isLess() operations)
      *
-     * @params arr is a Comparable array.
+     * @param arr is a Comparable array.
      */
     
     public static void sort(Comparable[] arr) {
 	int size = arr.length;
 
-	// i begins at index 1 and moves FORWARDS to the end
+	// i = 1 moves FORWARDS to i = size - 1
 	for (int i = 1; i < size; ++i) {
-	    // j moves BACKWARDS to the beginning starts at i - 1
+	    // j = i moves BACKWARDS to j = 1
 	    for (int j = i; j > 0; --j) {
-		// if a[i] < a[j] then swap
+		// if arr[j] < arr[j - 1] then swap
 		if (isLess(arr[j], arr[j - 1])) {
 		    swap(arr, j, j - 1);
 		}
@@ -38,10 +44,11 @@ public class Insertion {
     }
 
     /**
-     * Auxiliary method for swaping to elements of a Comparable array.
+     * Swaps two elements of a Comparable array.
      * 
-     * @params arr is a reference to a Comparable array; ix1 and ix2 are
-     * the indexes of the elements to be swapped on the array.
+     * @param arr is a reference to a Comparable array.
+     * @param ix1 is the index of the first element to be swapped on the array.
+     * @param ix2 is the index of the second element to be swapped on the array.
      */
     
     public static void swap(Comparable[] arr, int ix1, int ix2) {
@@ -53,11 +60,11 @@ public class Insertion {
     }
     
     /**
-     * Auxiliary method to compare two Comparable objects. Returns
-     * true if object one is less than object another.
+     * Compares two Comparables objects.
      * 
-     * @params one and another are Comparable objects.
-     * @returns true if one object is less than another object. Returns
+     * @param one is one of the objects to be compared.
+     * @param another is the other object to be compared.
+     * @return true if the one object is less than the another object. Returns
      * false otherwise.
      */
     
@@ -66,10 +73,10 @@ public class Insertion {
     }
 
     /**
-     * Convenience method that returns true if a Comparable array is sorted.
+     * Convenience method that checks if a Comparable array is sorted.
      *
-     * @params arr is a reference to a Comparable array.
-     * @returns true if the array is sorted. Returns falseo otherwise.
+     * @param arr is a reference to a Comparable array.
+     * @return true if the array is sorted. Returns false otherwise.
      */
     
     public static boolean isSorted(Comparable[] arr) {
@@ -83,9 +90,10 @@ public class Insertion {
     }
 
     /**
-     * Convenience method that shows all elements of a Comparable array.
+     * Convenience method that prints to standard output all elements
+     * of a Comparable array in an organized way, e.g., [1, 2, 3].
      * 
-     * @params arr is a reference to a Comparable array.
+     * @param arr is a reference to a Comparable array.
      */
     
     public static void show(Comparable[] arr) {
@@ -99,14 +107,20 @@ public class Insertion {
 	}
     }
 
-    // unit tests
+    // unit testing
     public static void main(String[] args) {
 	Integer[] arr = {3, 10, -1, 0, 5, 4, 15, 0, 7, 7};
 	//String[] arr = {"zzz", "ccc", "ddd", "eee", "aaa", "iii"};
+
+	System.out.println("\nArray BEFORE sorting:");
+	show(arr);
 	
+	System.out.println("\nSorting the array...\n");
+	Selection.sort(arr);
+	
+	System.out.println("Array AFTER sorting:");
 	show(arr);
-	System.out.println("Insertion sorting...");
-	Insertion.sort(arr);
-	show(arr);
+
+	System.out.println();
     }
 }

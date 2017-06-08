@@ -23,7 +23,7 @@ public class Selection {
 
     /**
      * Method that sorts a Comparable array using Selection sort.
-     * Complexity: O(N^2)
+     * Complexity: O(N^2) compares (isLess() operations)
      *
      * @param arr is a Comparable array.
      */
@@ -32,19 +32,15 @@ public class Selection {
 	int size = arr.length;
 
 	for (int i = 0; i < size; ++i) {
-	    
 	    // minIndex represents arr[i]
 	    int minIndex = i; 
 	    for (int j = i + 1; j < size; ++j) {
-
-		// if arr[j] is smaller than arr[i] we save
-		// j as the minIndex for the iterations
+		// if arr[j] < arr[minIndex]
 		if (isLess(arr[j], arr[minIndex])) {
-		    // a[j] holds the smallest value
+		    // arr[j] holds the smallest value
 		    minIndex = j;
 		}		
 	    }
-
 	    // swaps arr[i], arr[minIndex]
 	    swap(arr, i, minIndex);
 	}
