@@ -7,8 +7,6 @@ import java.util.NoSuchElementException;
  * This class has a reference to the head and tail Nodes as private instance variables.
  * It also implements the Iterable interface.
  *
- * Based on Algorithms (4th ed.) by Robert Sedgewick and Kevin Wayne.
- *
  * @author Igor G. Peternella
  * @date 05-30-2017
  */
@@ -76,7 +74,7 @@ public class SinglyLinkedList<T> implements Iterable<T>{
 	    // that sets both head and tail references to the same object
 	    createFirstNode(item);
 	} else {
-	    // creates a new Node that points to the old head Node
+	    // creates a new Node that points to the old head Node (old first)
 	    // and then sets the head reference to point this new Node (new head)
 	    head = new Node(item, head);
 	    ++size;
@@ -96,7 +94,7 @@ public class SinglyLinkedList<T> implements Iterable<T>{
 	    // that sets both head and tail references to the same object
 	    createFirstNode(item);
 	} else {
-	    // new Node	at the end points to null
+	    // creates a new Node whose next reference is null
 	    Node newNode = new Node(item, null);
 
 	    // old tail Node points to new Node
@@ -135,7 +133,7 @@ public class SinglyLinkedList<T> implements Iterable<T>{
 	    Node postNode = previousNode.next;
 
 	    // changes previous Node reference to the new Node
-	    // which in turn points to the post Node reference
+	    // which in turn points to the postNode reference
 	    previousNode.next = new Node(item, postNode);
 	    ++size;
 	}
@@ -223,11 +221,11 @@ public class SinglyLinkedList<T> implements Iterable<T>{
 	}
 	
 	if (ix == 0) {
-	    // create a reference to the old head
+	    // creates a reference to the old head
 	    Node oldHead = head;
-	    // get the old head's item
+	    // gets the old head's item
 	    T item = oldHead.item;
-	    // advance head reference to the next node (2nd on the list)
+	    // advances head reference to the next node (2nd on the list)
 	    head = oldHead.next;
 
 	    // removes reference of the old head to the new first Node
@@ -236,32 +234,32 @@ public class SinglyLinkedList<T> implements Iterable<T>{
 
 	    return item;
 	} else if (ix == size - 1) {
-	    // traverse to one Node before the tail Node (ix - 2)
+	    // traverses to one Node before the tail Node (ix - 2)
 	    // which will become the new tail Node
 	    Node newTail = getNodeAt(size - 2);
 	    // get the oldTail's item
 	    T item = tail.item;
 
-	    // set newTail's next reference to null since now its the last Node
+	    // sets newTail's next reference to null since now its the last Node
 	    newTail.next = null;
-	     // update tail reference variable to the new tail (last) Node
+	     // updates tail reference variable to the new tail (last) Node
 	    tail = newTail;
 	    --size;
 
 	    return item;
 	} else {
-	    // get a reference to the previous Node (ix - 1) -> O(N)
-	    // get a reference to the post Node (ix + 1) -> O(N)
-	    // get a reference to the desired Node to be removed (ix) -> O(N)
+	    // gets a reference to the previous Node (ix - 1) -> O(N)
+	    // gets a reference to the post Node (ix + 1) -> O(N)
+	    // gets a reference to the desired Node to be removed (ix) -> O(N)
 	    Node previousNode = getNodeAt(ix - 1);
 	    Node currentNode = getNodeAt(ix);
 	    Node postNode = getNodeAt(ix + 1);
-	    // get the item of the desired node to be removed
+	    // gets the item of the desired node to be removed
 	    T item = currentNode.item;
 
-	    // make the removed Node's next reference to point nowhere (null)
+	    // makes the removed Node's next reference point to null
 	    currentNode.next = null;
-	    // make previous Node point to the post Node (skip the removed Node)
+	    // makes previousNode's next reference point to the post Node (skip the removed Node)
 	    previousNode.next = postNode;
 	    --size;
 

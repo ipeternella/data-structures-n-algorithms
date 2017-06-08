@@ -7,8 +7,6 @@ import java.util.NoSuchElementException;
  * This class has a reference to the head and tail Nodes as private instance variables.
  * It also implements the Iterable interface.
  *
- * Based on Algorithms (4th ed.) by Robert Sedgewick and Kevin Wayne.
- *
  * @author Igor G. Peternella
  * @date 06-01-2017
  */
@@ -78,12 +76,13 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 	    // that sets both head and tail references to the same object
 	    createFirstNode(item);
 	} else {
-	    // sets newNode's previous reference to null (first Node now)
+	    // creates a newNode to be inserted whose previous
+	    // reference is null (will become the first Node of the list)
 	    // and its next reference to the old head
 	    Node newNode = new Node(item, null, head);
 	    // sets old head's previous reference to the newNode
 	    head.previous = newNode;
-	    // mutate head reference to the newNode (new head)
+	    // changes head reference to the new Node
 	    head = newNode;
 	    ++size;
 	}
@@ -102,20 +101,20 @@ public class DoublyLinkedList<T> implements Iterable<T> {
     	if (isEmpty()) {
     	    createFirstNode(item);
     	} else {
-	    // creates a new Node whose previous reference points to the old tail
-	    // and next references points to null (new tail)
+	    // creates a new Node to be inserted whose previous reference
+	    // points to the old tail and next references points to null (will become the last Node)
 	    Node newNode = new Node(item, tail, null);
 	    
-	    // sets old tail reference to point to the new Node (new tail)
+	    // sets old tail reference to point to the new Node
 	    tail.next = newNode;
-	    // mutate tail reference to point to the new Node
+	    // changes tail reference to point to the new Node
 	    tail = newNode;
 	    ++size;
     	}
     }
 
     /**
-     * Inserts a new Node at a given index of the linked list (changes tail).
+     * Inserts a new Node at a given index of the linked list.
      * Complexity: O(N)
      *
      * @param item is the item to be inserted.
@@ -136,7 +135,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
     	    rightInsert(item);	   
     	} else {
 	    // traverses list to get previous and post Node references to
-	    // insert the new Node between these Nodes.
+	    // insert the new Node between these two.
 	    Node previousNode = getNodeAt(ix - 1);
 	    Node postNode = getNodeAt(ix);
 
@@ -209,14 +208,14 @@ public class DoublyLinkedList<T> implements Iterable<T> {
      * @return item of the last Node.
      */
 
-    public void pop() {
+    public T pop() {
     	removeAt(size - 1);
     }
 
     /**
      * Removes and returns the item of a Node specified by its index.
      * Complexity: O(N) for ix != 0 and ix != size - 1
-     * O(1) for head and tail operations (ix = 0 || ix = size -1).
+     * O(1) for head and tail operations (ix = 0 or ix = size -1).
      *
      * @param ix is the index of the desired Node.
      * @return item of the Node specified by the given index.
@@ -235,49 +234,49 @@ public class DoublyLinkedList<T> implements Iterable<T> {
     	if (ix == 0) {
 	    // creates newNode reference that points to the second Node of the list
 	    Node newHead = head.next;
-	    // save last head's item
+	    // saves last head's item
 	    T item = head.item;
 
-	    // make newNode's previous reference point to null (will the head Node)
+	    // makes newNode's previous reference null (will become the first Node)
 	    newHead.previous = null;
-	    // remove old head's reference to the second Node
+	    // removes old head's reference to the second Node (newHead)
 	    head.next = null;
-	    // set head reference to the newHead;
+	    // sets head reference to the newHead;
 	    head = newHead;
 	    --size;
 
 	    return item;
     	} else if (ix == size - 1) {
-	    // create a new reference to the Node before the tail Node (newTail)
+	    // creates a new reference to the Node before the tail Node (newTail)
 	    Node newTail = tail.previous;
 	    // save tail's item
 	    T item = tail.item;
 
-	    // set newTail's next reference to null (last Node)
+	    // sets newTail's next reference to null (will become the last Node)
 	    newTail.next = null;
-	    // set old Tail's reference to point to null (gbc)
+	    // sets old Tail's reference to point to null (gbc)
 	    tail.previous = null;
-	    // set tail reference var to point to the newTail Node
+	    // sets tail reference var to point to the newTail Node
 	    tail = newTail;
 	    --size;
 
 	    return item;
     	} else {
-	    // get a reference to the previous Node (ix - 1) -> O(N)
-	    // get a reference to the post Node (ix + 1) -> O(N)
-	    // get a reference to the desired Node to be removed (ix) -> O(N)	    
+	    // gets a reference to the previous Node (ix - 1) -> O(N)
+	    // gets a reference to the post Node (ix + 1) -> O(N)
+	    // gets a reference to the desired Node to be removed (ix) -> O(N)	    
 	    Node previousNode = getNodeAt(ix - 1);
 	    Node currentNode = getNodeAt(ix);
 	    Node postNode = getNodeAt(ix + 1);
-	    // get the item of the desired Node to be removed
+	    // gets the item of the desired Node to be removed
 	    T item = currentNode.item;
 
-	    // adjust previousNode next reference to point to postNode
+	    // adjusts previousNode's next reference to point to postNode
 	    previousNode.next = postNode;
-	    // adjust postNode's previous reference to point to previousNode
+	    // adjusts postNode's previous reference to point to previousNode
 	    postNode.previous = previousNode;
 
-	    // eliminate removed Node's references to previousNode and postNode
+	    // eliminates removed Node's references to previousNode and postNode
 	    currentNode.next = null;
 	    currentNode.previous = null;
 	    --size;
@@ -300,7 +299,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 	return new DoublyLinkedListIterator();
     }
     
-    // Nested private class to create Iterator Objects for the SinglyLinkedList data structure.
+    // Nested private class to create Iterator Objects for the DoublyLinkedList data structure.
     // Iterator interface implementation.
     private class DoublyLinkedListIterator implements Iterator {
 	Node currentNode;
