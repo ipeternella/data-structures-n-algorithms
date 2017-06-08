@@ -209,7 +209,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
      */
 
     public T pop() {
-    	removeAt(size - 1);
+    	return removeAt(size - 1);
     }
 
     /**
