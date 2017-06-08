@@ -1,90 +1,190 @@
-/**
- *
- * This class represents a Doubly Linked List data structure.
- *
- * @author Igor G. Peternella
- * @date 05-30-2017
- *
- */
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * This class consists of an implementation of a doubly linked list data structure which
+ * uses a helper nested class Node to represent the nodes of the list.
+ * This class has a reference to the head and tail Nodes as private instance variables.
+ * It also implements the Iterable interface.
+ *
+ * Based on Algorithms (4th ed.) by Robert Sedgewick and Kevin Wayne.
+ *
+ * @author Igor G. Peternella
+ * @date 06-01-2017
+ */
+
 public class DoublyLinkedList<T> implements Iterable<T> {
 
-    private Node head;
-    private Node tail;
-    private int size;
+    private Node head;    // reference to the head (beginning) of the list
+    private Node tail;    // reference to the tail (end) of the list
+    private int size;     // primitive to hold the size (number of nodes)
+    
+    // nested class to represent doubly linked nodes
+    private class Node {
+	T item;           // item that the Node holds
+	Node next;        // reference to the next Node
+	Node previous;    // reference to the previous Node
 
+	// constructor takes an item and a reference to the previous AND next Node
+	// as arguments to build a new Node on the heap
+	public Node(T item, Node previous, Node next) {
+	    this.item = item;
+	    this.previous = previous;
+	    this.next = next;
+	}
+    }
+
+    /**
+     * Default constructor. Intializes an empty doubly linked list and sets
+     * the head and tail references to null.
+     */
+    
     public DoublyLinkedList() {
 	size = 0;
 	head = null;
 	tail = null;
     }
 
+    /**
+     * Returns the number of elements of the linked list.
+     *
+     * @return the size (number of elements) of the linked list.
+     */
+
     public int size() {
 	return size;
     }
+
+    /**
+     * Returns true if the linked list is empty (size is zero).
+     *
+     * @return true if the structure is empty and false otherwise.
+     */
 
     public boolean isEmpty() {
 	return size == 0;
     }
 
+    /**
+     * Inserts a new Node at the beginning of the linked list (changes head reference).
+     * Complexity: O(1). No traversing required.
+     *
+     * @param item is the item to be inserted.
+     */
+
     public void leftInsert(T item) {
 	if (isEmpty()) {
+	    // if the list is empty we call a special helper method
+	    // that sets both head and tail references to the same object
 	    createFirstNode(item);
 	} else {
+	    // sets newNode's previous reference to null (first Node now)
+	    // and its next reference to the old head
 	    Node newNode = new Node(item, null, head);
+	    // sets old head's previous reference to the newNode
 	    head.previous = newNode;
+	    // mutate head reference to the newNode (new head)
 	    head = newNode;
 	    ++size;
 	}
     }
 
+    /**
+     * Inserts a new Node at the end of the linked list (changes tail reference).
+     * Complexity: O(1). No traversing required.
+     *
+     * @param item is the item to be inserted.
+     */
+
     public void rightInsert(T item) {
+	// if the list is empty we call a special helper method
+	// that sets both head and tail references to the same object	
     	if (isEmpty()) {
     	    createFirstNode(item);
     	} else {
+	    // creates a new Node whose previous reference points to the old tail
+	    // and next references points to null (new tail)
 	    Node newNode = new Node(item, tail, null);
+	    
+	    // sets old tail reference to point to the new Node (new tail)
 	    tail.next = newNode;
+	    // mutate tail reference to point to the new Node
 	    tail = newNode;
 	    ++size;
     	}
     }
+
+    /**
+     * Inserts a new Node at a given index of the linked list (changes tail).
+     * Complexity: O(N)
+     *
+     * @param item is the item to be inserted.
+     * @param ix is the index to insert the new Node.
+     * @throw java.util.NoSuchElementException if ix is invalid.
+     */
         
     public void insertAt(T item, int ix) {
     	if(!isValidIndex(ix)) {
     	    throw new NoSuchElementException("Invalid node number.");
     	}
-
-    	// if ix == 0, then it's just a leftInsert
-    	// if ix == size - 1, then it's just a rightInsert
+    
     	if (ix == 0) {
+	    // if ix == 0, then it's just a leftInsert
     	    leftInsert(item);
     	} else if (ix == size - 1) {
+	    // if ix == size - 1, then it's just a rightInsert
     	    rightInsert(item);	   
     	} else {
+	    // traverses list to get previous and post Node references to
+	    // insert the new Node between these Nodes.
 	    Node previousNode = getNodeAt(ix - 1);
 	    Node postNode = getNodeAt(ix);
+
+	    // creates a newNode between previousNode and postNode
 	    Node newNode = new Node(item, previousNode, postNode);
 
+	    // adjusts previousNode's next reference to point to the newNode
+	    // and postNode's previous reference to point to the newNode
 	    previousNode.next = newNode;
 	    postNode.previous = newNode;
 	    ++size;
     	}
     }
 
+    // helper method to create first Node when list is empty
     private void createFirstNode(T item) {
 	head = new Node(item, null, null);
 	tail = head;
 	++size;
     }
 
+    /**
+     * Gets the item of a Node specified by its index.
+     * Complexity: O(N)
+     *
+     * @param ix is the index of the desired Node.
+     * @return item of the specified Node.
+     * @throw java.util.NoSuchElementException if ix is invalid.
+     */
+    
     public T getItemAt(int ix) {
+	if (!isValidIndex(ix)) {
+	    throw new NoSuchElementException("Invalid node number.");
+	}
+	
     	Node node = getNodeAt(ix);
 	
     	return node.item;
-    } 
+    }
+
+    /**
+     * Gets a reference of a Node object specified by its index.
+     * Complexity: O(N)
+     *
+     * @param ix is the index of the desired Node.
+     * @return reference to the specified Node.
+     * @throw java.util.NoSuchElementException if ix is invalid.
+     */
 
     public Node getNodeAt(int ix) {
     	if (!isValidIndex(ix)) {
@@ -100,10 +200,28 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 
     	return node;
     }
+    
+    /**
+     * Removes and returns the item of the last node (tail).
+     * Complexity: O(1). Since this is a Doubly linked list,
+     * traversing to the Node before the last one is not necessary.
+     *
+     * @return item of the last Node.
+     */
 
     public void pop() {
     	removeAt(size - 1);
     }
+
+    /**
+     * Removes and returns the item of a Node specified by its index.
+     * Complexity: O(N) for ix != 0 and ix != size - 1
+     * O(1) for head and tail operations (ix = 0 || ix = size -1).
+     *
+     * @param ix is the index of the desired Node.
+     * @return item of the Node specified by the given index.
+     * @throw java.util.NoSuchElementException if ix is invalid or list is empty.
+     */
 
     public T removeAt(int ix) {
     	if (!isValidIndex(ix)) {
@@ -115,33 +233,51 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 	}
 	
     	if (ix == 0) {
+	    // creates newNode reference that points to the second Node of the list
 	    Node newHead = head.next;
+	    // save last head's item
 	    T item = head.item;
-	    
+
+	    // make newNode's previous reference point to null (will the head Node)
 	    newHead.previous = null;
+	    // remove old head's reference to the second Node
 	    head.next = null;
+	    // set head reference to the newHead;
 	    head = newHead;
 	    --size;
 
 	    return item;
     	} else if (ix == size - 1) {
+	    // create a new reference to the Node before the tail Node (newTail)
 	    Node newTail = tail.previous;
+	    // save tail's item
 	    T item = tail.item;
-	    
+
+	    // set newTail's next reference to null (last Node)
 	    newTail.next = null;
+	    // set old Tail's reference to point to null (gbc)
 	    tail.previous = null;
+	    // set tail reference var to point to the newTail Node
 	    tail = newTail;
 	    --size;
 
 	    return item;
     	} else {
+	    // get a reference to the previous Node (ix - 1) -> O(N)
+	    // get a reference to the post Node (ix + 1) -> O(N)
+	    // get a reference to the desired Node to be removed (ix) -> O(N)	    
 	    Node previousNode = getNodeAt(ix - 1);
 	    Node currentNode = getNodeAt(ix);
 	    Node postNode = getNodeAt(ix + 1);
+	    // get the item of the desired Node to be removed
 	    T item = currentNode.item;
 
+	    // adjust previousNode next reference to point to postNode
 	    previousNode.next = postNode;
+	    // adjust postNode's previous reference to point to previousNode
 	    postNode.previous = previousNode;
+
+	    // eliminate removed Node's references to previousNode and postNode
 	    currentNode.next = null;
 	    currentNode.previous = null;
 	    --size;
@@ -150,6 +286,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
     	}
     }
 
+    // helper method that returns true if an index is invalid.
     private boolean isValidIndex(int ix) {
 	if (ix < 0 || ix >= size) {
 	    return false;
@@ -157,11 +294,14 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 	    return true;
 	}
     }
-
+    
+    // Iterable interface implementation for DoublyLinkedList data structure.
     public Iterator<T> iterator() {
 	return new DoublyLinkedListIterator();
     }
-
+    
+    // Nested private class to create Iterator Objects for the SinglyLinkedList data structure.
+    // Iterator interface implementation.
     private class DoublyLinkedListIterator implements Iterator {
 	Node currentNode;
 
@@ -184,19 +324,8 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 	    // unsupported
 	}
     }
-        
-    private class Node {
-	T item;
-	Node next;
-	Node previous;
 
-	public Node(T item, Node previous, Node next) {
-	    this.item = item;
-	    this.previous = previous;
-	    this.next = next;
-	}
-    }
-    
+    // unit testing
     public static void main(String[] args) {
 	DoublyLinkedList<Integer> dll = new DoublyLinkedList<Integer>();
 
