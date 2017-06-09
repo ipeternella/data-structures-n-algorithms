@@ -1,5 +1,5 @@
 /**
- * This class consists of an implementation of the Merge Sort algorithm.
+ * This class consists of an implementation of the Quick Sort algorithm.
  * All methods use the Comparable data type to ensure that objects used by the
  * methods of this class have implemented the Comparable interface i.e. this class can
  * be used to sort Integer, Double, String, etc. class types.
@@ -11,7 +11,7 @@
  * which makes the class more suitable for practical use, e.g., to sort a Comparable
  * array one could use the sort() method: 
  *
- *              Merge.sort(arrayReference)
+ *              Quick.sort(arrayReference)
  *
  * Based on Algorithms (4th ed.) by Robert Sedgewick and Kevin Wayne.
  * 
@@ -19,7 +19,7 @@
  * @date 06-05-2017
  */
 
-public class Merge {
+public class Quick {
 
     /**
      * Wrapper method to call the overloaded private sort method. Makes
@@ -34,7 +34,7 @@ public class Merge {
     }
     
     /* 
-     * Method that sorts a Comparable array using Merge sort.
+     * Method that sorts a Comparable array using Quick sort.
      *
      * arr is a reference to a Comparable array.
      * lo is the lowest index of arr
@@ -42,74 +42,50 @@ public class Merge {
      */
     
     private static void sort(Comparable[] arr, int lo, int hi) {
-	// base case to stop recursion (abstract array has only one element)
-	if (hi <= lo) { return; }
-
-	// computes mid index based on lo and hi indexes
-	int mid = lo + (hi - lo)/2;
+	if (lo >= hi) { return; }
 	
-	// sort method creates two abstract in place arrays recursively
-	// i.e. we can think of the arr reference as a reference to an array
-	// composed of two subarrays:
-	// left subarray [lo .. mid] index
-	// right subarray [mid + 1 .. hi] index
-	
-	// abstract left array
-	sort(arr, lo, mid);	
-	// abstract right array
-	sort(arr, mid + 1, hi);
-
-	// merge an array composed of two abstract in place subarrays
-	merge(arr, lo, mid, hi);
+	// returns the partition index
+	int p = partition(arr, lo, hi);
+	// repeat for lower left array
+	sort(arr, lo, p - 1);
+	// repeat for lower right array
+	sort(arr, p + 1, hi);
     }
 
-    /*
-     * Merges two abstract ordered subarrays into an ordered one.
-     * This is an inplace method that changes arr reference with the
-     * help of a copy auxiliar array
-     * 
-     * arr is a reference to a Comparable array.
-     * lo is the lowest index of arr
-     * mid is the mid index of arr
-     * hi is the highest index of arr
-     */
-    
-    private static void merge(Comparable[] arr, int lo, int mid, int hi) {
-	Comparable[] aux = new Comparable[arr.length];
-	int i = lo;           // beginning of the left inplace subarray
-	int j = mid + 1;      // beginning of the right inplace subarray
-	int k = lo;           // lower index of the abstract array
+    private static int partition(Comparable[] arr, int lo, int hi) {
+        Comparable pivot = arr[lo];
+	int i = lo + 1;
+	int j = hi;
 
-	// creates aux array as a copy
-	for (int w = lo; w <= hi; ++w) {
-	    aux[w] = arr[w];
-	}
-	
-	// when the left array or right array have no more elements
-	// to merge (exhausted) this loop breaks
-	while (i <= mid && j <= hi) {
-	    if (isLess(aux[i], aux[j])) {
-		// aux[i] < aux[j]
-		// we pick minimum value (i.e. aux[i]) of the left subarray of aux
-		arr[k++] = aux[i++];
-	    } else {
-		// aux[i] > aux[j]
-		// we pick minimum value (i.e. aux[j]) of the right subarray of aux
-		arr[k++] = aux[j++];
+	while (true) {
+	    // keeps moving up until a number
+	    // bigger than pivot is found (wrong position)
+	    while (i <= hi && isLess(arr[i], pivot)) {		
+		++i;
 	    }
+
+	    // keeps moving down until a number
+	    // small than pivot is found (wrong position)
+	    while (j >= 0 && isLess(pivot, arr[j])) {
+		--j;
+	    }
+
+	    if (i >= j) { break; }
+	    // swaps reversed numbers i.e. numbers smaller
+	    // than the pivot stays at the left subarray
+	    // and numbers higher stays at the right subarray
+	    swap(arr, i, j);
+	    //show(arr);
 	}
 
-	// fill with the remaining elements of the left subarray
-	while (i <= mid) {
-	    arr[k++] = aux[i++];
-	}
-	
-	// fill with the remaining elements of the right subarray
-	while (j <= hi) {
-	    arr[k++] = aux[j++];
-	}
+	// j has the proper position for the pivot where
+	// all numbers at the pivot's left are smaller and all numbers
+	// at its right are higher than itself
+	swap(arr, lo, j);
+
+	return j;
     }
-
+    
     /*
      * Swaps two elements of a Comparable array.
      * 
@@ -120,7 +96,6 @@ public class Merge {
     
     private static void swap(Comparable[] arr, int ix1, int ix2) {
 	Comparable temp = arr[ix1];
-	System.out.println("Swapping: " + arr[ix1] + " <---> " + arr[ix2]);
 	
 	arr[ix1] = arr[ix2];
 	arr[ix2] = temp;
@@ -183,7 +158,7 @@ public class Merge {
 	show(arr);
 	
 	System.out.println("\nSorting the array...\n");
-	Merge.sort(arr);
+	Quick.sort(arr);
 	
 	System.out.println("Array AFTER sorting:");
 	show(arr);
