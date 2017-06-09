@@ -43,32 +43,31 @@ public class Insertion {
 	}
     }
 
-    /**
+    /*
      * Swaps two elements of a Comparable array.
      * 
-     * @param arr is a reference to a Comparable array.
-     * @param ix1 is the index of the first element to be swapped on the array.
-     * @param ix2 is the index of the second element to be swapped on the array.
+     * arr is a reference to a Comparable array.
+     * ix1 is the index of the first element to be swapped on the array.
+     * ix2 is the index of the second element to be swapped on the array.
      */
     
-    public static void swap(Comparable[] arr, int ix1, int ix2) {
+    private static void swap(Comparable[] arr, int ix1, int ix2) {
 	Comparable temp = arr[ix1];
-	System.out.println("Swapping: " + arr[ix1] + " <---> " + arr[ix2]);
 	
 	arr[ix1] = arr[ix2];
 	arr[ix2] = temp;
     }
     
-    /**
+    /*
      * Compares two Comparables objects.
      * 
-     * @param one is one of the objects to be compared.
-     * @param another is the other object to be compared.
-     * @return true if the one object is less than the another object. Returns
+     * one is one of the objects to be compared.
+     * another is the other object to be compared.
+     * returns true if the one object is less than the another object. Returns
      * false otherwise.
      */
     
-    public static boolean isLess(Comparable one, Comparable another) {
+    private static boolean isLess(Comparable one, Comparable another) {
 	return one.compareTo(another) < 0; // -1 when less
     }
 
@@ -116,7 +115,7 @@ public class Insertion {
 	show(arr);
 	
 	System.out.println("\nSorting the array...\n");
-	Selection.sort(arr);
+	Insertion.sort(arr);
 	
 	System.out.println("Array AFTER sorting:");
 	show(arr);

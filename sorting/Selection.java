@@ -46,12 +46,12 @@ public class Selection {
 	}
     }
 
-    /**
+    /*
      * Swaps two elements of a Comparable array.
      * 
-     * @param arr is a reference to a Comparable array.
-     * @param ix1 is the index of the first element to be swapped on the array.
-     * @param ix2 is the index of the second element to be swapped on the array.
+     * arr is a reference to a Comparable array.
+     * ix1 is the index of the first element to be swapped on the array.
+     * ix2 is the index of the second element to be swapped on the array.
      */
     
     public static void swap(Comparable[] arr, int ix1, int ix2) {
@@ -60,12 +60,12 @@ public class Selection {
 	arr[ix2] = temp;
     }
     
-    /**
+    /*
      * Compares two Comparables objects.
      * 
-     * @param one is one of the objects to be compared.
-     * @param another is the other object to be compared.
-     * @return true if the one object is less than the another object. Returns
+     * one is one of the objects to be compared.
+     * another is the other object to be compared.
+     * returns true if the one object is less than the another object. Returns
      * false otherwise.
      */
     
