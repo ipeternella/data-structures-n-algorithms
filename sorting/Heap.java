@@ -33,7 +33,7 @@ public class Heap {
      *
      * Given the fact that:        virtual index == real index - 1  
      * Methods isLess() and swap() have been implemented to subtract 1 from the
-     * virtual indexes passed to these methods..
+     * virtual indexes passed to these methods.
      *
      * Complexity: O(N*log(N)) swaps.
      *
@@ -45,6 +45,8 @@ public class Heap {
 
 	// builds a heap from a Comparable array elements
 	// starts at half of the array to use sink() on each subheap
+	// heapIndex is a virtual index of an abstract array that starts
+	// at index one with the same elements of arr
 	for (int heapIndex = heapSize/2; heapIndex >= 1; --heapIndex) {
 	    sink(arr, heapIndex, heapSize);
 	}	
@@ -69,7 +71,7 @@ public class Heap {
      * an array from top to bottom.
      * 
      * arr is a reference to a Comparable array that represents a heap.
-     * heapIndex is a virtual array used for one-based arrays (required by heap algorithm).
+     * heapIndex is a virtual index used for one-based arrays (required by heap algorithm).
      * heapSize is the array size (size of the heap).
      */    
     
