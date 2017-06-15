@@ -63,7 +63,7 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
      * Inserts an item at the proper position in the queue based on its priority.
      * Complexity: O(log(N)). The usage of a Binary Heap allows this implementation
      * to have this complexity. With ordinary linked lists or arrays we have O(N) which
-     * is awful for M inserts = O(M*N).
+     * is awful for M insert operations that has the complexity of O(M*N).
      *
      * @param item is the item to be inserted.
      */
@@ -83,7 +83,7 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
      * Removes and returns the item with highest priority on the priority queue.
      * Complexity: O(log(N)). The usage of a Binary Heap allows this implementation
      * to have this complexity. With ordinary linked lists or arrays we have O(N) which
-     * is awful for M delMax = O(M*N).
+     * is awful for M delMax operations that has a complexity of O(M*N).
      *
      * @return item with the highest priority on the queue.
      * @throws java.util.NoSuchElementException if this method is invoked on a empty priority queue.
