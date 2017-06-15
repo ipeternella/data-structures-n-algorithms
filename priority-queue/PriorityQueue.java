@@ -6,8 +6,8 @@ import java.util.NoSuchElementException;
  * which is built on the top of a dynamic array structure which is interpreted
  * as a Binary Heap Tree.
  *
- * T is a bounded parametric type taht implements Comparable interface to allow
- * the "priority" comparisons in the data structure. 
+ * T is a bounded parametric type that implements the Comparable interface to allow
+ * the "priority" comparisons on the priority queue. 
  *
  * [!] Make sure that DynamicArray.java is in the same directory as this file [!]
  *
