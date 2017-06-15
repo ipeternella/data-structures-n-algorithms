@@ -9,6 +9,15 @@ import java.util.NoSuchElementException;
  * T is a bounded parametric type that implements the Comparable interface to allow
  * the "priority" comparisons on the priority queue. 
  *
+ * The algorithms for this data structure requires a one-index-based DynamicArray and not zero-index-based one
+ * because of the interpretation of this array as a Binary Heap that starts at heapIndex = 1. Hence, the 
+ * indexes used by these algorithms are called virtual indexes (heapIndexes) in contrast to the real indexes 
+ * for arrays that start at index 0 such as Java's.
+ *
+ * Given the fact that:        virtual index == real index - 1  
+ * Methods isLess() and swap() have been implemented to subtract 1 from the virtual indexes passed
+ * to these methods to map to the real elements of the DynamicArray.
+ * 
  * [!] Make sure that DynamicArray.java is in the same directory as this file [!]
  *
  * @author Igor G. Peternella
@@ -20,16 +29,7 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
     private DynamicArray<T> pq; // pq is a reference to a DynamicArray which is interpreted as a Heap
     private int heapSize;       // heapSize is the DynamicArray (Heap) size
 
-    /** 
-     * The algorithms for this data structure requires a one-index-based DynamicArray and not zero-index-based one
-     * because of the interpretation of this array as a Binary Heap that starts at heapIndex = 1. Hence, the 
-     * indexes used by these algorithms are called virtual indexes (heapIndexes) in contrast to the real indexes 
-     * for arrays that start at index 0 such as Java's.
-     *
-     * Given the fact that:        virtual index == real index - 1  
-     * Methods isLess() and swap() have been implemented to subtract 1 from the virtual indexes passed
-     * to these methods to map to the real elements of the DynamicArray which is zero-index-based.
-     *
+    /**
      * Builds an empty priority queue based on a DynamicArray implementation.
      */
     
@@ -41,7 +41,7 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
     /**
      * Returns true if the priority queue is empty (size is zero).
      *
-     * @return true if the stack is empty and false otherwise.
+     * @return true if the priority queue is empty and false otherwise.
      */
 
     public boolean isEmpty() {
@@ -61,6 +61,7 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
     
     /**
      * Inserts an item at the proper position in the queue based on its priority.
+     *
      * Complexity: O(log(N)). The usage of a Binary Heap allows this implementation
      * to have this complexity. With ordinary linked lists or arrays we have O(N) which
      * is awful for M insert operations that has the complexity of O(M*N).
@@ -81,6 +82,7 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
     
     /**
      * Removes and returns the item with highest priority on the priority queue.
+     *
      * Complexity: O(log(N)). The usage of a Binary Heap allows this implementation
      * to have this complexity. With ordinary linked lists or arrays we have O(N) which
      * is awful for M delMax operations that has a complexity of O(M*N).
@@ -130,6 +132,8 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
      * Goes down in a heap structure represented by an array and swaps children elements
      * that are bigger than their parent to ensure heap order i.e. this method heapifies
      * an array from top to bottom.
+     *
+     * Complexity: O(log(N)) swaps.
      * 
      * arr is a reference to a Comparable array that represents a heap.
      * heapIndex is a virtual index used for one-based arrays (required by heap algorithm).
@@ -179,8 +183,10 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
 
     /*
      * Goes up in a heap structure represented by an array and swaps a child and its parent until
-     * a bigger parent is found i.e. this method heapifies an array from top to bottom.
-     * 
+     * a bigger parent is found i.e. this method heapifies an array from top to bottom. 
+     *
+     * Complexity: O(log(N)) swaps.
+     *
      * heapIndex is a virtual index used for one-based arrays (required by heap algorithm).
      * heapSize is the array size (size of the heap).
      */    
@@ -252,6 +258,8 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
 	return one.compareTo(another) < 0; // -1 when less
     }
 
+    // Iterable interface implementation which returns the iterator
+    // of the DynamicArray
     public Iterator<T> iterator() {
 	return pq.iterator();
     }
