@@ -191,6 +191,28 @@ public class DynamicArray<T> implements Iterable<T>{
 	arr = newArr;
     }
 
+    /**
+     * Replaces an item at the given index position.
+     * Complexity: O(1).
+     *
+     * @param ix is a valid index.
+     * @param item is the item to replace the previous value located at the given index.
+     * @throws java.util.NoSuchElementException if this method is invoked on a empty DynamicArray.
+     * @throws java.lang.ArrayIndexOutOfBoundsException if an invalid ix is passed.
+     */
+
+    public void replaceAt(int ix, T item) {
+	if (isEmpty()) {
+	    throw new java.util.NoSuchElementException("Empty Dynamic Array.");
+	}	
+	
+	if (!isValidIndex(ix)) {
+	    throw new java.lang.ArrayIndexOutOfBoundsException("Invalid Index.");
+	}
+
+	arr[ix] = item;
+    }
+
     // helper method that returns true if an index is invalid.
     private boolean isValidIndex(int ix) {
 	if (ix < 0 || ix >= size) {
