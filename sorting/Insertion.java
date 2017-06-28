@@ -29,18 +29,18 @@ public class Insertion {
      */
     
     public static void sort(Comparable[] arr) {
-	int size = arr.length;
+		int size = arr.length;
 
-	// i = 1 moves FORWARDS to i = size - 1
-	for (int i = 1; i < size; ++i) {
-	    // j = i moves BACKWARDS to j = 1
-	    for (int j = i; j > 0; --j) {
-		// if arr[j] < arr[j - 1] then swap
-		if (isLess(arr[j], arr[j - 1])) {
-		    swap(arr, j, j - 1);
+		// i = 1 moves FORWARDS to i = size - 1
+		for (int i = 1; i < size; ++i) {
+			// j = i moves BACKWARDS to j = 1
+			for (int j = i; j > 0; --j) {
+				// if arr[j] < arr[j - 1] then swap
+				if (isLess(arr[j], arr[j - 1])) {
+					swap(arr, j, j - 1);
+				}
+			}
 		}
-	    }
-	}
     }
 
     /*
@@ -52,10 +52,10 @@ public class Insertion {
      */
     
     private static void swap(Comparable[] arr, int ix1, int ix2) {
-	Comparable temp = arr[ix1];
+		Comparable temp = arr[ix1];
 	
-	arr[ix1] = arr[ix2];
-	arr[ix2] = temp;
+		arr[ix1] = arr[ix2];
+		arr[ix2] = temp;
     }
     
     /*
@@ -68,7 +68,7 @@ public class Insertion {
      */
     
     private static boolean isLess(Comparable one, Comparable another) {
-	return one.compareTo(another) < 0; // -1 when less
+		return one.compareTo(another) < 0; // -1 when less
     }
 
     /**
@@ -79,13 +79,13 @@ public class Insertion {
      */
     
     public static boolean isSorted(Comparable[] arr) {
-	for (int i = 0; i < arr.length - 1; ++i) {
-	    if (!isLess(arr[i], arr[i + 1])) {
-		return false;
-	    }
-	}
+		for (int i = 0; i < arr.length - 1; ++i) {
+			if (!isLess(arr[i], arr[i + 1])) {
+				return false;
+			}
+		}
 
-	return true;
+		return true;
     }
 
     /**
@@ -96,30 +96,30 @@ public class Insertion {
      */
     
     public static void show(Comparable[] arr) {
-	System.out.print("[");
-	for (int i = 0; i < arr.length; ++i) {
-	    if (i != arr.length - 1) {
-		System.out.print(arr[i] + ", ");
-	    } else {
-		System.out.println(arr[i] + "]");
-	    }	    	    
-	}
+		System.out.print("[");
+		for (int i = 0; i < arr.length; ++i) {
+			if (i != arr.length - 1) {
+				System.out.print(arr[i] + ", ");
+			} else {
+				System.out.println(arr[i] + "]");
+			}	    	    
+		}
     }
 
     // unit testing
     public static void main(String[] args) {
-	Integer[] arr = {3, 10, -1, 0, 5, 4, 15, 0, 7, 7};
-	//String[] arr = {"zzz", "ccc", "ddd", "eee", "aaa", "iii"};
+		Integer[] arr = {3, 10, -1, 0, 5, 4, 15, 0, 7, 7};
+		//String[] arr = {"zzz", "ccc", "ddd", "eee", "aaa", "iii"};
 
-	System.out.println("\nArray BEFORE sorting:");
-	show(arr);
+		System.out.println("\nArray BEFORE sorting:");
+		show(arr);
 	
-	System.out.println("\nSorting the array...\n");
-	Insertion.sort(arr);
+		System.out.println("\nSorting the array...\n");
+		Insertion.sort(arr);
 	
-	System.out.println("Array AFTER sorting:");
-	show(arr);
+		System.out.println("Array AFTER sorting:");
+		show(arr);
 
-	System.out.println();
+		System.out.println();
     }
 }

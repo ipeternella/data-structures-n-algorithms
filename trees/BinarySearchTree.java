@@ -24,20 +24,20 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
     private Node root;       // Node reference to the root of the tree
 
     private class Node {
-	K     key;           // key of the Node
-	V     value;         // value of Node
-	Node  left;          // reference to the left subtree
-	Node  right;         // reference to the right subtree
-	int   size;          // number of nodes below this node (inclusive)
+		K     key;           // key of the Node
+		V     value;         // value of Node
+		Node  left;          // reference to the left subtree
+		Node  right;         // reference to the right subtree
+		int   size;          // number of nodes below this node (inclusive)
 	
-	// Constructor of a Node	
-	public Node(K key, V value, int size, Node left, Node right) {
-	    this.key = key;
-	    this.value = value;
-	    this.size = size;
-	    this.left = left;
-	    this.right = right;
-	}
+		// Constructor of a Node	
+		public Node(K key, V value, int size, Node left, Node right) {
+			this.key = key;
+			this.value = value;
+			this.size = size;
+			this.left = left;
+			this.right = right;
+		}
     }
 
     /**
@@ -67,9 +67,9 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
      */
     
     private int size(Node x) {
-	if (x == null) { return 0; }
+		if (x == null) { return 0; }
 		
-	return x.size;
+		return x.size;
     }
     
     /**
@@ -79,7 +79,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
      */
     
     public boolean isEmpty() {
-	return size() == 0;
+		return size() == 0;
     }
 
     /**
@@ -113,29 +113,29 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
      */
     
     private Node put(K key, V value, Node x) {
-	// base recursion case: null link is the insertion point: search miss
-	if (x == null) return new Node(key, value, 1, null, null);
+		// base recursion case: null link is the insertion point: search miss
+		if (x == null) return new Node(key, value, 1, null, null);
 		
-	// compare the value of key and x.key of the current node
-	// key and x.key are Comparable types
-	int cmp = key.compareTo(x.key);
+		// compare the value of key and x.key of the current node
+		// key and x.key are Comparable types
+		int cmp = key.compareTo(x.key);
 	
-	// if the insertion key < node's key then we go to the left subtree
-	if      (cmp < 0) x.left = put(key, value, x.left);
+		// if the insertion key < node's key then we go to the left subtree
+		if      (cmp < 0) x.left = put(key, value, x.left);
 		
-	// if the insertion key > node's key then we go to the right subtree
-	else if (cmp > 0) x.right = put(key, value, x.right);
+		// if the insertion key > node's key then we go to the right subtree
+		else if (cmp > 0) x.right = put(key, value, x.right);
 	
-	// insertion key == node's key so it updates node's value: search hit
-	// cmp == 0
-	else x.value = value; 
+		// insertion key == node's key so it updates node's value: search hit
+		// cmp == 0
+		else x.value = value; 
 	
-	// updates x.size based on left and right subtree sizes + 1 (new node)
-	x.size = size(x.left) + size(x.right) + 1;
+		// updates x.size based on left and right subtree sizes + 1 (new node)
+		x.size = size(x.left) + size(x.right) + 1;
 		
-	// returns the current node to overwrite
-	// it's parent left or right link
-	return x;
+		// returns the current node to overwrite
+		// it's parent left or right link
+		return x;
     }
 
     /**
@@ -165,22 +165,22 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
      */
 
     private Node get(K key, Node x) {
-	// search miss: no node was found for the given key
-	if (x == null) return null;
+		// search miss: no node was found for the given key
+		if (x == null) return null;
 		
-	// compares the value of key and x.key of the current node
-	// key and x.key are Comparable types
-	int cmp = key.compareTo(x.key);
+		// compares the value of key and x.key of the current node
+		// key and x.key are Comparable types
+		int cmp = key.compareTo(x.key);
 	
-	// if the search key is < node's key than we go to the left subtree
-	if      (cmp < 0) return get(key, x.left);
+		// if the search key is < node's key than we go to the left subtree
+		if      (cmp < 0) return get(key, x.left);
 		
-	// if the search key is > node's key than we go to the right subtree
-	else if (cmp > 0) return get(key, x.right);
+		// if the search key is > node's key than we go to the right subtree
+		else if (cmp > 0) return get(key, x.right);
 	
-	// search key == node's key so it returns node's value: search hit
-	// cmp == 0
-	else return x;
+		// search key == node's key so it returns node's value: search hit
+		// cmp == 0
+		else return x;
     }
     
     /**
@@ -198,8 +198,8 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
      */
 
     private Node min(Node x) {
-	if (x.left == null) return x;
-	else return min(x.left);
+		if (x.left == null) return x;
+		else return min(x.left);
     }
 
     /**
@@ -217,8 +217,8 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
      */
 
     private Node max(Node x) {
-	if (x.right == null) return x;
-	else return max(x.right);
+		if (x.right == null) return x;
+		else return max(x.right);
     }
 
     /**
@@ -230,14 +230,14 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
      */
     
     public K floor(K key) {
-	Node retNode = floor(key, root);
+		Node retNode = floor(key, root);
 	
-	// empty tree nothing to test
-	if (retNode == null) return null;
+		// empty tree nothing to test
+		if (retNode == null) return null;
 		
-	return retNode.key;
+		return retNode.key;
     }
-
+    
     /*
      * Helper recursive function to return the floor of a given key on the BST.
      *
@@ -277,56 +277,56 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
      */
     
     private void printTree() {
-	Queue<Node> q = new Queue<Node>();
+		Queue<Node> q = new Queue<Node>();
 	
-	q.enqueue(root);
+		q.enqueue(root);
 	
-	while (!q.isEmpty()) {
-	    Node actualNode = q.dequeue();
+		while (!q.isEmpty()) {
+			Node actualNode = q.dequeue();
 	
-	    // prints key of the node
-	    System.out.println(actualNode.key);
+			// prints key of the node
+			System.out.println(actualNode.key);
 	
-	    if (actualNode.left != null) 
-		q.enqueue(actualNode.left);
+			if (actualNode.left != null) 
+				q.enqueue(actualNode.left);
 	
-	    if (actualNode.right != null)
-		q.enqueue(actualNode.right);
-	}
+			if (actualNode.right != null)
+				q.enqueue(actualNode.right);
+		}
     }
     
     // unit testing
     public static void main(String[] args) {
-	BinarySearchTree<String, Integer> bst = new BinarySearchTree<String, Integer>();
+		BinarySearchTree<String, Integer> bst = new BinarySearchTree<String, Integer>();
 	
-	// random data to insert, size = 10
-	bst.put("S", 0);
-	bst.put("E", 1);
-	bst.put("A", 2);
-	bst.put("R", 3);
-	bst.put("C", 4);
-	bst.put("H", 5);
-	bst.put("E", 6); // updates Node with key = E
-	bst.put("X", 7);
-	bst.put("M", 9);
-	bst.put("P", 10);
-	bst.put("L", 11);
+		// random data to insert, size = 10
+		bst.put("S", 0);
+		bst.put("E", 1);
+		bst.put("A", 2);
+		bst.put("R", 3);
+		bst.put("C", 4);
+		bst.put("H", 5);
+		bst.put("E", 6); // updates Node with key = E
+		bst.put("X", 7);
+		bst.put("M", 9);
+		bst.put("P", 10);
+		bst.put("L", 11);
 	
-	//bst.printTree();
+		//bst.printTree();
 	
-	// get a value
-	// System.out.println(bst.get("L"));
+		// get a value
+		// System.out.println(bst.get("L"));
 	
-	// get a updated value
-	// System.out.println(bst.get("E"));
+		// get a updated value
+		// System.out.println(bst.get("E"));
 	
-	// size test
-	// System.out.println(bst.size());
+		// size test
+		// System.out.println(bst.size());
 	
-	// min max test
-	// System.out.println(bst.min());
-	// System.out.println(bst.max());
+		// min max test
+		// System.out.println(bst.min());
+		// System.out.println(bst.max());
 	
-	System.out.println(bst.floor("G"));
+		System.out.println(bst.floor("G"));
     }
 }

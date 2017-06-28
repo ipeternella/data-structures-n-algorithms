@@ -1,4 +1,4 @@
-/**
+'/**
  * This class consists of an implementation of the elementary Selection Sort algorithm.
  * All methods use the Comparable data type to ensure that objects used by the
  * methods of this class have implemented the Comparable interface i.e. this class can
@@ -29,21 +29,21 @@ public class Selection {
      */
     
     public static void sort(Comparable[] arr) {
-	int size = arr.length;
+		int size = arr.length;
 
-	for (int i = 0; i < size; ++i) {
-	    // minIndex represents arr[i]
-	    int minIndex = i; 
-	    for (int j = i + 1; j < size; ++j) {
-		// if arr[j] < arr[minIndex]
-		if (isLess(arr[j], arr[minIndex])) {
-		    // arr[j] holds the smallest value
-		    minIndex = j;
-		}		
-	    }
-	    // swaps arr[i], arr[minIndex]
-	    swap(arr, i, minIndex);
-	}
+		for (int i = 0; i < size; ++i) {
+			// minIndex represents arr[i]
+			int minIndex = i; 
+			for (int j = i + 1; j < size; ++j) {
+				// if arr[j] < arr[minIndex]
+				if (isLess(arr[j], arr[minIndex])) {
+					// arr[j] holds the smallest value
+					minIndex = j;
+				}		
+			}
+			// swaps arr[i], arr[minIndex]
+			swap(arr, i, minIndex);
+		}
     }
 
     /*
@@ -55,9 +55,9 @@ public class Selection {
      */
     
     public static void swap(Comparable[] arr, int ix1, int ix2) {
-	Comparable temp = arr[ix1];
-	arr[ix1] = arr[ix2];
-	arr[ix2] = temp;
+		Comparable temp = arr[ix1];
+		arr[ix1] = arr[ix2];
+		arr[ix2] = temp;
     }
     
     /*
@@ -70,8 +70,8 @@ public class Selection {
      */
     
     public static boolean isLess(Comparable one, Comparable another) {
-	// .compareTo() returns -1 when one < another	
-	return one.compareTo(another) < 0; // 
+		// .compareTo() returns -1 when one < another	
+		return one.compareTo(another) < 0; // 
     }
 
     /**
@@ -82,13 +82,13 @@ public class Selection {
      */
     
     public static boolean isSorted(Comparable[] arr) {
-	for (int i = 0; i < arr.length - 1; ++i) {
-	    if (!isLess(arr[i], arr[i + 1])) {
-		return false;
-	    }
-	}
+		for (int i = 0; i < arr.length - 1; ++i) {
+			if (!isLess(arr[i], arr[i + 1])) {
+				return false;
+			}
+		}
 
-	return true;
+		return true;
     }
 
     /**
@@ -99,29 +99,29 @@ public class Selection {
      */
     
     public static void show(Comparable[] arr) {
-	System.out.print("[");
-	for (int i = 0; i < arr.length; ++i) {
-	    if (i != arr.length - 1) {
-		System.out.print(arr[i] + ", ");
-	    } else {
-		System.out.println(arr[i] + "]");
-	    }	    	    
-	}
+		System.out.print("[");
+		for (int i = 0; i < arr.length; ++i) {
+			if (i != arr.length - 1) {
+				System.out.print(arr[i] + ", ");
+			} else {
+				System.out.println(arr[i] + "]");
+			}	    	    
+		}
     }
 
     // unit testing
     public static void main(String[] args) {
-	Integer[] arr = {3, 10, -1, 0, 5, 4, 15, 7};
+		Integer[] arr = {3, 10, -1, 0, 5, 4, 15, 7};
 
-	System.out.println("\nArray BEFORE sorting:");
-	show(arr);
+		System.out.println("\nArray BEFORE sorting:");
+		show(arr);
 	
-	System.out.println("\nSorting the array...\n");
-	Selection.sort(arr);
+		System.out.println("\nSorting the array...\n");
+		Selection.sort(arr);
 	
-	System.out.println("Array AFTER sorting:");
-	show(arr);
+		System.out.println("Array AFTER sorting:");
+		show(arr);
 
-	System.out.println();
+		System.out.println();
     }
 }

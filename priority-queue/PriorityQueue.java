@@ -34,8 +34,8 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
      */
     
     public PriorityQueue() {
-	pq = new DynamicArray<T>();
-	heapSize = 0;
+		pq = new DynamicArray<T>();
+		heapSize = 0;
     }
     
     /**
@@ -45,7 +45,7 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
      */
 
     public boolean isEmpty() {
-	return heapSize == 0;
+		return heapSize == 0;
     }
 
     /**
@@ -55,7 +55,7 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
      */
     
     public int size() {
-	return heapSize;
+		return heapSize;
     }
 
     
@@ -70,14 +70,14 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
      */
 
     public void insert(T item) {
-	// appends an item at the end of the DynamicArray (as Last node of the heap)
-	pq.append(item);
+		// appends an item at the end of the DynamicArray (as Last node of the heap)
+		pq.append(item);
 	
-	// increases heapSize
-	++heapSize;
+		// increases heapSize
+		++heapSize;
 	
-	// swims up to reheapify from bottom up
-	swim(heapSize);	
+		// swims up to reheapify from bottom up
+		swim(heapSize);	
     }
     
     /**
@@ -92,25 +92,25 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
      */
     
     public T delMax() {
-	if (isEmpty()) {
-	    throw new java.util.NoSuchElementException("Empty priority queue.");
-	}
-	// picks the item at the top of the heap which is the biggest item (highest priority)
-	T item = pq.getAt(0);
+		if (isEmpty()) {
+			throw new java.util.NoSuchElementException("Empty priority queue.");
+		}
+		// picks the item at the top of the heap which is the biggest item (highest priority)
+		T item = pq.getAt(0);
 
-	// swaps the top node (biggest item) with the last node
-	swap(1, heapSize);
+		// swaps the top node (biggest item) with the last node
+		swap(1, heapSize);
 
-	// biggest node is at the last position but violates heap order so we decrease heapSize
-	--heapSize;
+		// biggest node is at the last position but violates heap order so we decrease heapSize
+		--heapSize;
 
-	// removes item from the DynamicArray (Heap)
-	pq.pop();
+		// removes item from the DynamicArray (Heap)
+		pq.pop();
 
-	// sinks down to reheapify from top to bottom
-	sink(1);
+		// sinks down to reheapify from top to bottom
+		sink(1);
 
-	return item;
+		return item;
     }
     
     /**
@@ -121,11 +121,11 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
      */
     
     public T max() {
-	if (isEmpty()) {
-	    throw new java.util.NoSuchElementException("Empty priority queue.");
-	}
+		if (isEmpty()) {
+			throw new java.util.NoSuchElementException("Empty priority queue.");
+		}
 	
-	return pq.getAt(0);
+		return pq.getAt(0);
     }
     
     /*
@@ -141,44 +141,44 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
      */    
     
     private void sink(int heapIndex) {
-	// begins going down the heap if the starting index (parent) has
-	// at least a leftChild node so 2 * heapLevel < heapSize evals to true!
+		// begins going down the heap if the starting index (parent) has
+		// at least a leftChild node so 2 * heapLevel < heapSize evals to true!
 	
-	// loops until a parent node with no children is found
-	// so 2 * heapIndex > heapSize
-	while (2 * heapIndex <= heapSize) {
-	    // heapIndex is a virtual index and so are leftChild and others	    
-	    int parent = heapIndex;                    // parent node
-	    int leftChild = 2 * heapIndex;             // first child node
+		// loops until a parent node with no children is found
+		// so 2 * heapIndex > heapSize
+		while (2 * heapIndex <= heapSize) {
+			// heapIndex is a virtual index and so are leftChild and others	    
+			int parent = heapIndex;                    // parent node
+			int leftChild = 2 * heapIndex;             // first child node
 	    
-	    // assumes leftChild is the biggest 
-	    int biggestChild = leftChild;
+			// assumes leftChild is the biggest 
+			int biggestChild = leftChild;
 
-	    // checks if the leftChild has a rightChild sibling
-	    if (leftChild < heapSize) {
-		int rightChild = 2 * heapIndex + 1;        // second child node
+			// checks if the leftChild has a rightChild sibling
+			if (leftChild < heapSize) {
+				int rightChild = 2 * heapIndex + 1;        // second child node
 
-		// picks the biggest Sibling (right or left) to compare with parent
-		if (isLess(leftChild, rightChild)) {
-		    biggestChild = rightChild;
-		}
-	    }
+				// picks the biggest Sibling (right or left) to compare with parent
+				if (isLess(leftChild, rightChild)) {
+					biggestChild = rightChild;
+				}
+			}
 	    
-	    // if biggestChild is smaller than parent
-	    // than it follows the heap order so break
-	    if (isLess(biggestChild, parent)) {
-		break;
-	    } else {
-		// biggestChild is bigger than parent
-		// which violates heap order so swap
-		swap(biggestChild, parent);
-	    }
+			// if biggestChild is smaller than parent
+			// than it follows the heap order so break
+			if (isLess(biggestChild, parent)) {
+				break;
+			} else {
+				// biggestChild is bigger than parent
+				// which violates heap order so swap
+				swap(biggestChild, parent);
+			}
 	    	    
-	    // advances to biggest child
-	    // which will become the next parent
-	    // to move down on the heap for then next iteration
-	    heapIndex = biggestChild;
-	}
+			// advances to biggest child
+			// which will become the next parent
+			// to move down on the heap for then next iteration
+			heapIndex = biggestChild;
+		}
     }
 
     /*
@@ -192,25 +192,25 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
      */    
     
     private void swim(int heapIndex) {
-	// heapifies from bottom-up until the first node
-	// which has no parent (heapIndex = 1)
-	while (heapIndex > 1) {
-	    int child = heapIndex;
-	    int parent = heapIndex/2;
+		// heapifies from bottom-up until the first node
+		// which has no parent (heapIndex = 1)
+		while (heapIndex > 1) {
+			int child = heapIndex;
+			int parent = heapIndex/2;
 
-	    // if child is bigger than its parent node
-	    // swap
-	    if (isLess(parent, child)) {
-		swap(parent, child);
-	    } else {
-		// if a a bigger parent is found
-		// then the heap order is ensured
-		break;
-	    }
+			// if child is bigger than its parent node
+			// swap
+			if (isLess(parent, child)) {
+				swap(parent, child);
+			} else {
+				// if a a bigger parent is found
+				// then the heap order is ensured
+				break;
+			}
 
-	    // moves up on the heap for the next iteration
-	    heapIndex = parent;
-	}
+			// moves up on the heap for the next iteration
+			heapIndex = parent;
+		}
     }
 
     /*
@@ -222,16 +222,16 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
      */    
     
     private void swap(int ix1, int ix2) {
-	// corrects virtual indexes of the heap to
-	// map to real indexes of 0 based java arrays (which DynamicArray is based)
-	--ix1;
-	--ix2;
+		// corrects virtual indexes of the heap to
+		// map to real indexes of 0 based java arrays (which DynamicArray is based)
+		--ix1;
+		--ix2;
 	
         T temp = pq.getAt(ix1);
 
-	// swaps items at the real indexes of the DynamicArray
-	pq.replaceAt(ix1, pq.getAt(ix2));
-	pq.replaceAt(ix2, temp);
+		// swaps items at the real indexes of the DynamicArray
+		pq.replaceAt(ix1, pq.getAt(ix2));
+		pq.replaceAt(ix2, temp);
     }
     
     /*
@@ -246,58 +246,58 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
      */
     
     private boolean isLess(int ix1, int ix2) {
-	// corrects virtual indexes of the heap to
-	// map to real indexes of 0 based java arrays (which DynamicArray is based)
-	--ix1;
-	--ix2;
+		// corrects virtual indexes of the heap to
+		// map to real indexes of 0 based java arrays (which DynamicArray is based)
+		--ix1;
+		--ix2;
 
-	// gets the items at the real index from the Dynamic Array
-	Comparable one = pq.getAt(ix1);
-	Comparable another = pq.getAt(ix2);
+		// gets the items at the real index from the Dynamic Array
+		Comparable one = pq.getAt(ix1);
+		Comparable another = pq.getAt(ix2);
 	
-	return one.compareTo(another) < 0; // -1 when less
+		return one.compareTo(another) < 0; // -1 when less
     }
 
     // Iterable interface implementation which returns the iterator
     // of the DynamicArray
     public Iterator<T> iterator() {
-	return pq.iterator();
+		return pq.iterator();
     }
            
     // unit testing
     public static void main(String[] args) {
-	PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+		PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
 
-	pq.insert(2);
-	pq.insert(1);
-	pq.insert(5);
-	pq.insert(3);
-	pq.insert(20);
+		pq.insert(2);
+		pq.insert(1);
+		pq.insert(5);
+		pq.insert(3);
+		pq.insert(20);
 
-	// for (int i : pq) {
-	//     System.out.println(i);
-	// }
+		// for (int i : pq) {
+		//     System.out.println(i);
+		// }
 
-	System.out.println(pq.delMax());
+		System.out.println(pq.delMax());
 
-	pq.insert(7);
+		pq.insert(7);
 	
-	System.out.println(pq.delMax());
-	System.out.println(pq.delMax());
-	System.out.println(pq.delMax());
-	System.out.println(pq.delMax());
-	System.out.println(pq.delMax());
+		System.out.println(pq.delMax());
+		System.out.println(pq.delMax());
+		System.out.println(pq.delMax());
+		System.out.println(pq.delMax());
+		System.out.println(pq.delMax());
 
-	System.out.println("size: " + pq.size());
+		System.out.println("size: " + pq.size());
 
-	pq.insert(3);
-	pq.insert(3);
-	pq.insert(25);
+		pq.insert(3);
+		pq.insert(3);
+		pq.insert(25);
 
-	System.out.println(pq.delMax());
-	System.out.println(pq.delMax());
-	System.out.println(pq.delMax());
+		System.out.println(pq.delMax());
+		System.out.println(pq.delMax());
+		System.out.println(pq.delMax());
 	
-	System.out.println("size: " + pq.size());
+		System.out.println("size: " + pq.size());
     }
 }

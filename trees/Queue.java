@@ -24,8 +24,8 @@ public class Queue<T> implements Iterable<T> {
      */
     
     public Queue() {
-	singlyLinkedList = new SinglyLinkedList<T>();
-	size = 0;
+		singlyLinkedList = new SinglyLinkedList<T>();
+		size = 0;
     }
 
     /**
@@ -35,7 +35,7 @@ public class Queue<T> implements Iterable<T> {
      */
 
     public boolean isEmpty() {
-	return size == 0;
+		return size == 0;
     }
     
     /**
@@ -45,7 +45,7 @@ public class Queue<T> implements Iterable<T> {
      */
 
     public int size() {
-	return size;
+		return size;
     }
 
     /**
@@ -56,11 +56,11 @@ public class Queue<T> implements Iterable<T> {
      */
     
     public void enqueue(T item) {
-	// inserts the item at the end of a singly linked list
-	// to follow FIFO policy
-	// which is O(1) operation
-	singlyLinkedList.rightInsert(item);
-	++size;
+		// inserts the item at the end of a singly linked list
+		// to follow FIFO policy
+		// which is O(1) operation
+		singlyLinkedList.rightInsert(item);
+		++size;
     }
 
     /**
@@ -72,15 +72,15 @@ public class Queue<T> implements Iterable<T> {
      */
 
     public T dequeue() {
-	if (isEmpty()) {
-	    throw new NoSuchElementException("Empty queue.");
-	}
+		if (isEmpty()) {
+			throw new NoSuchElementException("Empty queue.");
+		}
 	
-	--size;
+		--size;
 
-	// returns the first item of the singly linked list
-	// which is O(1) operation
-	return singlyLinkedList.removeAt(0);
+		// returns the first item of the singly linked list
+		// which is O(1) operation
+		return singlyLinkedList.removeAt(0);
     }
 
     /**
@@ -92,11 +92,11 @@ public class Queue<T> implements Iterable<T> {
      */
 
     public T peek() {
-	if (isEmpty()) {
-	    throw new NoSuchElementException("Empty queue.");
-	}
+		if (isEmpty()) {
+			throw new NoSuchElementException("Empty queue.");
+		}
 	
-	return singlyLinkedList.getItemAt(0);
+		return singlyLinkedList.getItemAt(0);
     }
 
     /**
@@ -109,47 +109,47 @@ public class Queue<T> implements Iterable<T> {
      */
 
     public T getAt(int ix) {
-	if (!isValidIndex(ix)) {
-	    throw new NoSuchElementException("Invalid queue index.");
-	}
+		if (!isValidIndex(ix)) {
+			throw new NoSuchElementException("Invalid queue index.");
+		}
 
-	// uses singly linked list method which is O(N)
-	return singlyLinkedList.getItemAt(ix);
+		// uses singly linked list method which is O(N)
+		return singlyLinkedList.getItemAt(ix);
     }
 
     // helper method that returns true if an index is invalid
     private boolean isValidIndex(int ix) {
-	if (ix < 0 || ix >= size) {
-	    return false;
-	} else {
-	    return true;
-	}
+		if (ix < 0 || ix >= size) {
+			return false;
+		} else {
+			return true;
+		}
     }
 
     // Iterable interface implementation for the queue data structure
     public Iterator<T> iterator() {
-	// returns the iterator from the SinglyLinkedList class
-	// which follows the Iterator<T> interface
-	return singlyLinkedList.iterator();
+		// returns the iterator from the SinglyLinkedList class
+		// which follows the Iterator<T> interface
+		return singlyLinkedList.iterator();
     }    
 
     // unit testing
     public static void main(String[] args) {
-	Queue<Integer> q = new Queue<Integer>();
+		Queue<Integer> q = new Queue<Integer>();
 
-	q.enqueue(1);
-	q.enqueue(2);
-	q.enqueue(3);
+		q.enqueue(1);
+		q.enqueue(2);
+		q.enqueue(3);
 
-	q.dequeue();
-	q.dequeue();
-	q.dequeue();
+		q.dequeue();
+		q.dequeue();
+		q.dequeue();
 
-	q.enqueue(-5);
-	q.enqueue(10);
+		q.enqueue(-5);
+		q.enqueue(10);
 
-	for (int i : q) {
-	    System.out.println(i);
-	}
+		for (int i : q) {
+			System.out.println(i);
+		}
     }
 }

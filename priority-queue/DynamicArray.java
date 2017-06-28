@@ -26,8 +26,8 @@ public class DynamicArray<T> implements Iterable<T>{
      */
     
     public DynamicArray() {
-	size = 0;
-	arr = (T[]) new Object[INITIAL_SIZE];
+		size = 0;
+		arr = (T[]) new Object[INITIAL_SIZE];
     }
 
     /**
@@ -37,7 +37,7 @@ public class DynamicArray<T> implements Iterable<T>{
      */
     
     public boolean isEmpty() {
-	return size == 0;
+		return size == 0;
     }
 
     /**
@@ -47,7 +47,7 @@ public class DynamicArray<T> implements Iterable<T>{
      */
 
     public int size() {
-	return size;
+		return size;
     }
 
     /**
@@ -58,13 +58,13 @@ public class DynamicArray<T> implements Iterable<T>{
      */
 
     public void append(T item) {
-	arr[size] = item;
-	++size;
+		arr[size] = item;
+		++size;
 
-	// resizes to a new array if necessary
-	if (size == arr.length) {
-	    resize(2 * size);
-	}
+		// resizes to a new array if necessary
+		if (size == arr.length) {
+			resize(2 * size);
+		}
     }
 
     /**
@@ -78,24 +78,24 @@ public class DynamicArray<T> implements Iterable<T>{
      */
     
     public void append(T item, int ix) {
-	// isValidIndex is a helper method
-	if (!isValidIndex(ix)) {
-	    throw new java.lang.ArrayIndexOutOfBoundsException("Invalid Index.");
-	} 	
+		// isValidIndex is a helper method
+		if (!isValidIndex(ix)) {
+			throw new java.lang.ArrayIndexOutOfBoundsException("Invalid Index.");
+		} 	
 
-	// shifts elements to the right after the insertion
-	for (int i = size - 1; i >= ix; --i) {
-	    arr[i + 1] = arr[i];
-	}
+		// shifts elements to the right after the insertion
+		for (int i = size - 1; i >= ix; --i) {
+			arr[i + 1] = arr[i];
+		}
 
-	// inserts item @ ix position
-	arr[ix] = item;
-	++size;
+		// inserts item @ ix position
+		arr[ix] = item;
+		++size;
 
-	// resizes to a new array if necessary
-	if (size == arr.length) {
-	    resize(2 * size);
-	}
+		// resizes to a new array if necessary
+		if (size == arr.length) {
+			resize(2 * size);
+		}
     }
     
     /**
@@ -108,11 +108,11 @@ public class DynamicArray<T> implements Iterable<T>{
      */
 
     public T getAt(int ix) {
-	if (isValidIndex(ix)) {
-	    return arr[ix];
-	} else {
-	    throw new java.lang.ArrayIndexOutOfBoundsException("Invalid Index.");
-	}
+		if (isValidIndex(ix)) {
+			return arr[ix];
+		} else {
+			throw new java.lang.ArrayIndexOutOfBoundsException("Invalid Index.");
+		}
     }
 
     /**
@@ -124,20 +124,20 @@ public class DynamicArray<T> implements Iterable<T>{
      */
    
     public T pop() {
-	if (isEmpty()) {
-	    throw new java.util.NoSuchElementException("Empty Dynamic Array.");
-	}
+		if (isEmpty()) {
+			throw new java.util.NoSuchElementException("Empty Dynamic Array.");
+		}
 	
-	T item = arr[size - 1];
-	arr[size - 1] = null; // avoids loitering is removed
-	--size;
+		T item = arr[size - 1];
+		arr[size - 1] = null; // avoids loitering is removed
+		--size;
 
-	// reduces arr length by half if0 25% occupation is reached
-	if (size < (float) arr.length/4) {
-	    resize(arr.length/2);
-	}
+		// reduces arr length by half if0 25% occupation is reached
+		if (size < (float) arr.length/4) {
+			resize(arr.length/2);
+		}
 	
-	return item;
+		return item;
     }
     
     /**
@@ -151,44 +151,44 @@ public class DynamicArray<T> implements Iterable<T>{
      */
     
     public T pop(int ix) {
-	if (isEmpty()) {
-	    throw new java.util.NoSuchElementException("Empty Dynamic Array.");
-	}	
+		if (isEmpty()) {
+			throw new java.util.NoSuchElementException("Empty Dynamic Array.");
+		}	
 	
-	if (!isValidIndex(ix)) {
-	    throw new java.lang.ArrayIndexOutOfBoundsException("Invalid Index.");
-	}
+		if (!isValidIndex(ix)) {
+			throw new java.lang.ArrayIndexOutOfBoundsException("Invalid Index.");
+		}
 	
-	T item = arr[ix];
+		T item = arr[ix];
 
-	// shifts elements to the left
-	for (int i = ix; i < size - 1; ++i) {
-	    arr[i] = arr[i + 1];	    
-	}
+		// shifts elements to the left
+		for (int i = ix; i < size - 1; ++i) {
+			arr[i] = arr[i + 1];	    
+		}
 	
-	arr[size - 1] = null; // after shifting to left last element is set to null (empty space)
-	--size;
+		arr[size - 1] = null; // after shifting to left last element is set to null (empty space)
+		--size;
 
-	// reduces arr length by half if 25% occupation is reached
-	if (size < (float) arr.length/4) {
-	    resize(arr.length/2);
-	}
+		// reduces arr length by half if 25% occupation is reached
+		if (size < (float) arr.length/4) {
+			resize(arr.length/2);
+		}
 	
-	return item;
+		return item;
     }
 
     // resize helper method that copies every element of the current array into a new array
     // with a bigger of small capacity given by the argument newCapacity.    
     private void resize(int newCapacity) {
-	T[] newArr = (T[]) new Object[newCapacity];
+		T[] newArr = (T[]) new Object[newCapacity];
 
-	// copy arr array into newArr array
-	for (int i = 0; i < size; ++i) {
-	    newArr[i] = arr[i];
-	}
+		// copy arr array into newArr array
+		for (int i = 0; i < size; ++i) {
+			newArr[i] = arr[i];
+		}
 
-	// change reference
-	arr = newArr;
+		// change reference
+		arr = newArr;
     }
 
     /**
@@ -202,72 +202,72 @@ public class DynamicArray<T> implements Iterable<T>{
      */
 
     public void replaceAt(int ix, T item) {
-	if (isEmpty()) {
-	    throw new java.util.NoSuchElementException("Empty Dynamic Array.");
-	}	
+		if (isEmpty()) {
+			throw new java.util.NoSuchElementException("Empty Dynamic Array.");
+		}	
 	
-	if (!isValidIndex(ix)) {
-	    throw new java.lang.ArrayIndexOutOfBoundsException("Invalid Index.");
-	}
+		if (!isValidIndex(ix)) {
+			throw new java.lang.ArrayIndexOutOfBoundsException("Invalid Index.");
+		}
 
-	arr[ix] = item;
+		arr[ix] = item;
     }
 
     // helper method that returns true if an index is invalid.
     private boolean isValidIndex(int ix) {
-	if (ix < 0 || ix >= size) {
-	    return false;
-	} else {
-	    return true;
-	}
+		if (ix < 0 || ix >= size) {
+			return false;
+		} else {
+			return true;
+		}
     }
 
     // Iterable interface implementation for the DynamicArray data structure.
     public Iterator<T> iterator() {
-	return new DynamicArrayIterator();
+		return new DynamicArrayIterator();
     }
 
     // Nested private class to create Iterator Objects for the DynamicArray data structure.
     // Iterator interface implementation.
     private class DynamicArrayIterator implements Iterator<T> {
-	int iteratorIx, collectionSize;
+		int iteratorIx, collectionSize;
 
-	public DynamicArrayIterator() {
-	    iteratorIx = 0;
-	    collectionSize = size;
-	}
+		public DynamicArrayIterator() {
+			iteratorIx = 0;
+			collectionSize = size;
+		}
 
-	public boolean hasNext(){
-	    return iteratorIx < collectionSize;
-	}
+		public boolean hasNext(){
+			return iteratorIx < collectionSize;
+		}
 
-	public T next() {
-	    T item = arr[iteratorIx];
-	    ++iteratorIx;
+		public T next() {
+			T item = arr[iteratorIx];
+			++iteratorIx;
 	    
-	    return item;
-	}
+			return item;
+		}
 
-	public void remove() {
-	    throw new UnsupportedOperationException("Unsafe operation not implemented.");
-	}
+		public void remove() {
+			throw new UnsupportedOperationException("Unsafe operation not implemented.");
+		}
     }
     
     // unit testing
     public static void main(String[] args) {
-	DynamicArray<Integer> a = new DynamicArray<Integer>();
+		DynamicArray<Integer> a = new DynamicArray<Integer>();
 
-	for (int i = 0; i < 10; ++i) {
-	    a.append(i);
-	}
+		for (int i = 0; i < 10; ++i) {
+			a.append(i);
+		}
 
-	a.append(-5, 5);
-	a.pop(5);
-	a.pop();
-	a.append(15);
+		a.append(-5, 5);
+		a.pop(5);
+		a.pop();
+		a.append(15);
 	
-	for (int i : a) {
-	    System.out.println(i);
-	}
+		for (int i : a) {
+			System.out.println(i);
+		}
     }
 }    

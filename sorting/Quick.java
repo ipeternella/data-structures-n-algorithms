@@ -30,7 +30,7 @@ public class Quick {
      */
     
     public static void sort(Comparable[] arr) {
-	sort(arr, 0, arr.length - 1);
+		sort(arr, 0, arr.length - 1);
     }
     
     /* 
@@ -42,48 +42,48 @@ public class Quick {
      */
     
     private static void sort(Comparable[] arr, int lo, int hi) {
-	if (lo >= hi) { return; }
+		if (lo >= hi) { return; }
 	
-	// returns the partition index
-	int p = partition(arr, lo, hi);
-	// repeat for lower left array
-	sort(arr, lo, p - 1);
-	// repeat for lower right array
-	sort(arr, p + 1, hi);
+		// returns the partition index
+		int p = partition(arr, lo, hi);
+		// repeat for lower left array
+		sort(arr, lo, p - 1);
+		// repeat for lower right array
+		sort(arr, p + 1, hi);
     }
 
     private static int partition(Comparable[] arr, int lo, int hi) {
         Comparable pivot = arr[lo];
-	int i = lo + 1;
-	int j = hi;
+		int i = lo + 1;
+		int j = hi;
 
-	while (true) {
-	    // keeps moving up until a number
-	    // bigger than pivot is found (wrong position)
-	    while (i <= hi && isLess(arr[i], pivot)) {		
-		++i;
-	    }
+		while (true) {
+			// keeps moving up until a number
+			// bigger than pivot is found (wrong position)
+			while (i <= hi && isLess(arr[i], pivot)) {		
+				++i;
+			}
 
-	    // keeps moving down until a number
-	    // small than pivot is found (wrong position)
-	    while (j >= 0 && isLess(pivot, arr[j])) {
-		--j;
-	    }
+			// keeps moving down until a number
+			// small than pivot is found (wrong position)
+			while (j >= 0 && isLess(pivot, arr[j])) {
+				--j;
+			}
 
-	    if (i >= j) { break; }
-	    // swaps reversed numbers i.e. numbers smaller
-	    // than the pivot stays at the left subarray
-	    // and numbers higher stays at the right subarray
-	    swap(arr, i, j);
-	    //show(arr);
-	}
+			if (i >= j) { break; }
+			// swaps reversed numbers i.e. numbers smaller
+			// than the pivot stays at the left subarray
+			// and numbers higher stays at the right subarray
+			swap(arr, i, j);
+			//show(arr);
+		}
 
-	// j has the proper position for the pivot where
-	// all numbers at the pivot's left are smaller and all numbers
-	// at its right are higher than itself
-	swap(arr, lo, j);
+		// j has the proper position for the pivot where
+		// all numbers at the pivot's left are smaller and all numbers
+		// at its right are higher than itself
+		swap(arr, lo, j);
 
-	return j;
+		return j;
     }
     
     /*
@@ -95,10 +95,10 @@ public class Quick {
      */    
     
     private static void swap(Comparable[] arr, int ix1, int ix2) {
-	Comparable temp = arr[ix1];
+		Comparable temp = arr[ix1];
 	
-	arr[ix1] = arr[ix2];
-	arr[ix2] = temp;
+		arr[ix1] = arr[ix2];
+		arr[ix2] = temp;
     }
     
     /*
@@ -111,7 +111,7 @@ public class Quick {
      */
     
     private static boolean isLess(Comparable one, Comparable another) {
-	return one.compareTo(another) < 0; // -1 when less
+		return one.compareTo(another) < 0; // -1 when less
     }
 
     /**
@@ -122,13 +122,13 @@ public class Quick {
      */
     
     public static boolean isSorted(Comparable[] arr) {
-	for (int i = 0; i < arr.length - 1; ++i) {
-	    if (!isLess(arr[i], arr[i + 1])) {
-		return false;
-	    }
-	}
+		for (int i = 0; i < arr.length - 1; ++i) {
+			if (!isLess(arr[i], arr[i + 1])) {
+				return false;
+			}
+		}
 
-	return true;
+		return true;
     }
 
     /**
@@ -139,30 +139,30 @@ public class Quick {
      */
     
     public static void show(Comparable[] arr) {
-	System.out.print("[");
-	for (int i = 0; i < arr.length; ++i) {
-	    if (i != arr.length - 1) {
-		System.out.print(arr[i] + ", ");
-	    } else {
-		System.out.println(arr[i] + "]");
-	    }	    	    
-	}
+		System.out.print("[");
+		for (int i = 0; i < arr.length; ++i) {
+			if (i != arr.length - 1) {
+				System.out.print(arr[i] + ", ");
+			} else {
+				System.out.println(arr[i] + "]");
+			}	    	    
+		}
     }
 
     // unit testing
     public static void main(String[] args) {
-	Integer[] arr = {3, 10, -1, 0, 5, 4, 15, 0, 7, 7};
-	//String[] arr = {"zzz", "ccc", "ddd", "eee", "aaa", "iii"};
+		Integer[] arr = {3, 10, -1, 0, 5, 4, 15, 0, 7, 7};
+		//String[] arr = {"zzz", "ccc", "ddd", "eee", "aaa", "iii"};
 
-	System.out.println("\nArray BEFORE sorting:");
-	show(arr);
+		System.out.println("\nArray BEFORE sorting:");
+		show(arr);
 	
-	System.out.println("\nSorting the array...\n");
-	Quick.sort(arr);
+		System.out.println("\nSorting the array...\n");
+		Quick.sort(arr);
 	
-	System.out.println("Array AFTER sorting:");
-	show(arr);
+		System.out.println("Array AFTER sorting:");
+		show(arr);
 
-	System.out.println();
+		System.out.println();
     }
 }

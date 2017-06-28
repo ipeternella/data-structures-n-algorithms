@@ -25,8 +25,8 @@ public class Deque<T> implements Iterable<T> {
      */
     
     public Deque() {
-	doublyLinkedList = new DoublyLinkedList<T>();
-	size = 0;	
+		doublyLinkedList = new DoublyLinkedList<T>();
+		size = 0;	
     }
 
     /**
@@ -36,7 +36,7 @@ public class Deque<T> implements Iterable<T> {
      */
 
     public boolean isEmpty() {
-	return size == 0;
+		return size == 0;
     }
 
     /**
@@ -46,7 +46,7 @@ public class Deque<T> implements Iterable<T> {
      */
     
     public int size() {
-	return size;
+		return size;
     }
 
     /**
@@ -57,9 +57,9 @@ public class Deque<T> implements Iterable<T> {
      */
     
     public void leftInsert(T item) {
-	// O(1) operation for a doubly linked list
-	doublyLinkedList.leftInsert(item);
-	++size;
+		// O(1) operation for a doubly linked list
+		doublyLinkedList.leftInsert(item);
+		++size;
     }
     
     /**
@@ -70,9 +70,9 @@ public class Deque<T> implements Iterable<T> {
      */
 
     public void rightInsert(T item) {
-	// O(1) operation for a doubly linked list
-	doublyLinkedList.rightInsert(item); 
-	++size;
+		// O(1) operation for a doubly linked list
+		doublyLinkedList.rightInsert(item); 
+		++size;
     }
 
     /**
@@ -84,15 +84,15 @@ public class Deque<T> implements Iterable<T> {
      */
 
     public T removeLeft() {
-	if (isEmpty()) {
-	    throw new NoSuchElementException("Empty deque.");
-	}
+		if (isEmpty()) {
+			throw new NoSuchElementException("Empty deque.");
+		}
 	
-	--size;
+		--size;
 	
-	// removing at the beginning is a O(1) operation
-	// for a doubly linked list
-	return doublyLinkedList.removeAt(0); 
+		// removing at the beginning is a O(1) operation
+		// for a doubly linked list
+		return doublyLinkedList.removeAt(0); 
     }
 
     /**
@@ -104,17 +104,17 @@ public class Deque<T> implements Iterable<T> {
      */
 
     public T removeRight() {
-	if (isEmpty()) {
-	    throw new NoSuchElementException("Empty deque.");
-	}
+		if (isEmpty()) {
+			throw new NoSuchElementException("Empty deque.");
+		}
 
-	// removing at the end is also a O(1) operation
-	// for a doubly linked list (not for a singly though)
-	T item = doublyLinkedList.removeAt(size - 1); 
-	--size;
+		// removing at the end is also a O(1) operation
+		// for a doubly linked list (not for a singly though)
+		T item = doublyLinkedList.removeAt(size - 1); 
+		--size;
 
-	// returns the item
-	return item;
+		// returns the item
+		return item;
     }
 
     /**
@@ -126,12 +126,12 @@ public class Deque<T> implements Iterable<T> {
      */
     
     public T peekLeft() {
-	if (isEmpty()) {
-	    throw new NoSuchElementException("Empty deque.");
-	}
+		if (isEmpty()) {
+			throw new NoSuchElementException("Empty deque.");
+		}
 
-	// O(1) operation for a doubly linked list
-	return doublyLinkedList.getItemAt(0);
+		// O(1) operation for a doubly linked list
+		return doublyLinkedList.getItemAt(0);
     }
 
     /**
@@ -143,12 +143,12 @@ public class Deque<T> implements Iterable<T> {
      */
     
     public T peekRight() {
-	if (isEmpty()) {
-	    throw new NoSuchElementException("Empty Deque.");
-	}
+		if (isEmpty()) {
+			throw new NoSuchElementException("Empty Deque.");
+		}
 
-	// O(1) operation for a doubly linked list
-	return doublyLinkedList.getItemAt(size - 1);
+		// O(1) operation for a doubly linked list
+		return doublyLinkedList.getItemAt(size - 1);
     }
 
     /**
@@ -161,48 +161,48 @@ public class Deque<T> implements Iterable<T> {
      */
 
     public T getAt(int ix) {
-	if (!isValidIndex(ix)) {
-	    throw new NoSuchElementException("Invalid deque index.");
-	}
+		if (!isValidIndex(ix)) {
+			throw new NoSuchElementException("Invalid deque index.");
+		}
 
-	// uses doubly linked list method which is O(N)
-	return doublyLinkedList.getItemAt(ix);
+		// uses doubly linked list method which is O(N)
+		return doublyLinkedList.getItemAt(ix);
     }
 
     // helper method that returns true if an index is invalid
     private boolean isValidIndex(int ix) {
-	if (ix < 0 || ix >= size) {
-	    return false;
-	} else {
-	    return true;
-	}
+		if (ix < 0 || ix >= size) {
+			return false;
+		} else {
+			return true;
+		}
     }
     
     // Iterable interface implementation for the deque data structure
     public Iterator<T> iterator() {
-	// returns the iterator from the DoublyLinkedList class
-	// which follows the Iterator<T> interface
-	return doublyLinkedList.iterator();
+		// returns the iterator from the DoublyLinkedList class
+		// which follows the Iterator<T> interface
+		return doublyLinkedList.iterator();
     }
     
     // unit testing
     public static void main(String[] arg) {
-	Deque<Integer> d = new Deque<Integer>();
+		Deque<Integer> d = new Deque<Integer>();
 	
-	d.leftInsert(1);
-	d.leftInsert(2);
-	d.rightInsert(-5);
-	d.removeRight();
-	d.rightInsert(100);
-	d.removeRight();
-	d.removeLeft();
+		d.leftInsert(1);
+		d.leftInsert(2);
+		d.rightInsert(-5);
+		d.removeRight();
+		d.rightInsert(100);
+		d.removeRight();
+		d.removeLeft();
 	
-	for (int i : d) {
-	    System.out.println(i);
-	}
+		for (int i : d) {
+			System.out.println(i);
+		}
 
-	System.out.println(d.peekLeft());
-	System.out.println(d.peekRight());
-	System.out.println(d.size());
+		System.out.println(d.peekLeft());
+		System.out.println(d.peekRight());
+		System.out.println(d.size());
     }
 }
