@@ -2,5 +2,10 @@
 \#*#
 *~
 
-# Java .class files
+# Java .class file
 *.class
+
+# eclipse .files and build output folder
+.*
+/bin/
+
