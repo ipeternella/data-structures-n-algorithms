@@ -182,6 +182,94 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 	// cmp == 0
 	else return x;
     }
+    
+    /**
+     * Returns the minimum key of the BST. 
+     *
+     * @return minimum key of the BST.
+     */
+
+    public K min() {
+	return min(root).key;
+    }
+
+    /*
+     * Moves down to left subtrees until the last node (with min value) is found.
+     */
+
+    private Node min(Node x) {
+	if (x.left == null) return x;
+	else return min(x.left);
+    }
+
+    /**
+     * Returns the maximum key of the BST. 
+     *
+     * @return maximum key of the BST.
+     */
+
+    public K max() {
+	return max(root).key;
+    }
+
+    /*
+     * Moves down to right subtrees until the last node (with max value) is found.
+     */
+
+    private Node max(Node x) {
+	if (x.right == null) return x;
+	else return max(x.right);
+    }
+
+    /**
+     * Returns the floor of a given key on the BST. Floor is the largest key on the
+     * BST but smaller than the given key or equal.
+     *
+     * @param key is the key whose floor is desired.
+     * @return the floor key.
+     */
+    
+    public K floor(K key) {
+	Node retNode = floor(key, root);
+
+	// empty tree nothing to test
+	if (retNode == null) return null;
+	
+	return retNode.key;
+    }
+
+    /*
+     * Helper recursive function to return the floor of a given key on the BST.
+     *
+     * param key is the key whose floor is desired
+     * param x is the current root of the subtree
+     * return the node with the floor key of the desired floorKey
+     */
+
+    private Node floor(K key, Node x) {
+    	if (x == null) return null;
+    	// compares 
+    	int cmp = key.compareTo(x.key);
+
+	// node's key is bigger than search key
+    	// look at the left subtree for smaller key
+    	if      (cmp < 0)  { return floor(key, x.left); }
+    	// return this node if the same key has been found (floor is key which is less or EQUAL)
+    	else if (cmp == 0) { return x; }
+    	// node's key is smaller than search key = could be floor
+	// look at the right subtree for bigger key
+    	else {
+    	    // local Node binding
+    	    Node local = floor(key, x.right);
+
+    	    // if local is null then the x reference
+    	    // holds the floor key. Hence, return x.
+    	    if (local == null) { return x; }
+
+    	    // if local is not null return its value
+    	    else               { return local; }
+    	}
+    }
 
     /*
      * Convenience method that prints a tree. Prints each complete level KEYS.
@@ -233,6 +321,12 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 	// System.out.println(bst.get("E"));
 
 	// size test
-	// System.out.println(bst.size());	
+	// System.out.println(bst.size());
+
+	// min max test
+	// System.out.println(bst.min());
+	// System.out.println(bst.max());
+
+	System.out.println(bst.floor("G"));
     }
 }
