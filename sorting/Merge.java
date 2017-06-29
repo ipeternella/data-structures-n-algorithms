@@ -19,7 +19,7 @@
  * @date 06-05-2017
  */
 
-package Sorting;
+package sorting;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class Merge {

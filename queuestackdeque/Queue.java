@@ -8,9 +8,9 @@
  * @date 06-02-2017
  */
 
-package StackQueueDeque;
+package queuestackdeque;
 
-import LinkedList.SinglyLinkedList;
+import linkedlist.SinglyLinkedList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 

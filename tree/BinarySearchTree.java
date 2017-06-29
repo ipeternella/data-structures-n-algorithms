@@ -13,9 +13,9 @@
  * @date 06-20-2017
  */
 
-package Tree;
+package tree;
 
-import StackQueueDeque.Queue;
+import queuestackdeque.Queue;
 
 public class BinarySearchTree<K extends Comparable<K>, V> {
     

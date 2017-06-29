@@ -1,5 +1,5 @@
 /**
- * This class consists of an implementation of the elementary Insertion Sort algorithm.
+ * This class consists of an implementation of the elementary Selection Sort algorithm.
  * All methods use the Comparable data type to ensure that objects used by the
  * methods of this class have implemented the Comparable interface i.e. this class can
  * be used to sort Integer, Double, String, etc. class types.
@@ -11,7 +11,7 @@
  * which makes the class more suitable for practical use, e.g., to sort a Comparable
  * array one could use the sort() method: 
  *
- *              Insertion.sort(arrayReference)
+ *              Selection.sort(arrayReference)
  *
  * Based on Algorithms (4th ed.) by Robert Sedgewick and Kevin Wayne.
  * 
@@ -19,13 +19,13 @@
  * @date 06-05-2017
  */
 
-package Sorting;
+package sorting;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
-public class Insertion {
+public class Selection {
 
     /**
-     * Method that sorts a Comparable array using Insertion sort.
+     * Method that sorts a Comparable array using Selection sort.
      * Complexity: O(N^2) compares (isLess() operations)
      *
      * @param arr is a Comparable array.
@@ -34,15 +34,18 @@ public class Insertion {
     public static void sort(Comparable[] arr) {
         int size = arr.length;
 
-        // i = 1 moves FORWARDS to i = size - 1
-        for (int i = 1; i < size; ++i) {
-            // j = i moves BACKWARDS to j = 1
-            for (int j = i; j > 0; --j) {
-                // if arr[j] < arr[j - 1] then swap
-                if (isLess(arr[j], arr[j - 1])) {
-                    swap(arr, j, j - 1);
-                }
+        for (int i = 0; i < size; ++i) {
+            // minIndex represents arr[i]
+            int minIndex = i; 
+            for (int j = i + 1; j < size; ++j) {
+                // if arr[j] < arr[minIndex]
+                if (isLess(arr[j], arr[minIndex])) {
+                    // arr[j] holds the smallest value
+                    minIndex = j;
+                }		
             }
+            // swaps arr[i], arr[minIndex]
+            swap(arr, i, minIndex);
         }
     }
 
@@ -54,9 +57,8 @@ public class Insertion {
      * ix2 is the index of the second element to be swapped on the array.
      */
     
-    private static void swap(Comparable[] arr, int ix1, int ix2) {
+    public static void swap(Comparable[] arr, int ix1, int ix2) {
         Comparable temp = arr[ix1];
-	
         arr[ix1] = arr[ix2];
         arr[ix2] = temp;
     }
@@ -70,8 +72,9 @@ public class Insertion {
      * false otherwise.
      */
     
-    private static boolean isLess(Comparable one, Comparable another) {
-        return one.compareTo(another) < 0; // -1 when less
+    public static boolean isLess(Comparable one, Comparable another) {
+        // .compareTo() returns -1 when one < another	
+        return one.compareTo(another) < 0; // 
     }
 
     /**
@@ -111,14 +114,13 @@ public class Insertion {
 
     // unit testing
     public static void main(String[] args) {
-        Integer[] arr = {3, 10, -1, 0, 5, 4, 15, 0, 7, 7};
-        //String[] arr = {"zzz", "ccc", "ddd", "eee", "aaa", "iii"};
+        Integer[] arr = {3, 10, -1, 0, 5, 4, 15, 7};
 
         System.out.println("\nArray BEFORE sorting:");
         show(arr);
 	
         System.out.println("\nSorting the array...\n");
-        Insertion.sort(arr);
+        Selection.sort(arr);
 	
         System.out.println("Array AFTER sorting:");
         show(arr);

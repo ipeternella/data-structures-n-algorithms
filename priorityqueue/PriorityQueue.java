@@ -19,10 +19,10 @@
  * @date 06-10-2017
  */
 
-package PriorityQueue;
+package priorityqueue;
 
 import java.util.Iterator;
-import DynamicArray.DynamicArray;
+import dynamicarray.DynamicArray;
 
 public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
         

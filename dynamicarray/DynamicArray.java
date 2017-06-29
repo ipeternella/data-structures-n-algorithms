@@ -11,7 +11,7 @@
  * @date 05-30-2017
  */
 
-package DynamicArray;
+package dynamicarray;
 
 import java.util.Iterator;
 

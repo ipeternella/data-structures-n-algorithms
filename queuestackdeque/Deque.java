@@ -9,9 +9,9 @@
  * @date 06-03-2017
  */
 
-package StackQueueDeque;
+package queuestackdeque;
 
-import LinkedList.DoublyLinkedList;
+import linkedlist.DoublyLinkedList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 

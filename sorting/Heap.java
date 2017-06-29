@@ -18,7 +18,7 @@
  * @author Igor G. Peternella
  * @date 06-05-2017
  */
-package Sorting;
+package sorting;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class Heap {

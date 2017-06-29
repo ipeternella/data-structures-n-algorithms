@@ -8,7 +8,7 @@
  * @date 05-30-2017
  */
 
-package LinkedList;
+package linkedlist;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
