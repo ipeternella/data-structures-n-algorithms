@@ -19,15 +19,15 @@ public class SinglyLinkedList<T> implements Iterable<T>{
 
     // nested class to represent singly linked nodes
     private class Node {
-		T item;      // item that the node holds
-		Node next;   // reference to the next node
-	
-		// constructor takes an item and a reference to the next Node
-		// as arguments to build a new Node on the heap
-		public Node(T item, Node next) {
-			this.item = item;
-			this.next = next;
-		}
+        T item;      // item that the node holds
+        Node next;   // reference to the next node
+        
+        // constructor takes an item and a reference to the next Node
+        // as arguments to build a new Node on the heap
+        public Node(T item, Node next) {
+            this.item = item;
+            this.next = next;
+        }
     }
     
     /**
@@ -36,9 +36,9 @@ public class SinglyLinkedList<T> implements Iterable<T>{
      */
     
     public SinglyLinkedList() {
-		size = 0;
-		head = null;
-		tail = null;
+        size = 0;
+        head = null;
+        tail = null;
     }
 
     /**
@@ -48,7 +48,7 @@ public class SinglyLinkedList<T> implements Iterable<T>{
      */
     
     public int size() {
-		return size;
+        return size;
     }
 
     /**
@@ -58,7 +58,7 @@ public class SinglyLinkedList<T> implements Iterable<T>{
      */
 
     public boolean isEmpty() {
-		return size == 0;
+        return size == 0;
     }
 
     /**
@@ -69,16 +69,16 @@ public class SinglyLinkedList<T> implements Iterable<T>{
      */
 
     public void leftInsert(T item) {
-		if (isEmpty()) {
-			// if the list is empty we call a special helper method
-			// that sets both head and tail references to the same object
-			createFirstNode(item);
-		} else {
-			// creates a new Node that points to the old head Node (old first)
-			// and then sets the head reference to point this new Node (new head)
-			head = new Node(item, head);
-			++size;
-		}
+        if (isEmpty()) {
+            // if the list is empty we call a special helper method
+            // that sets both head and tail references to the same object
+            createFirstNode(item);
+        } else {
+            // creates a new Node that points to the old head Node (old first)
+            // and then sets the head reference to point this new Node (new head)
+            head = new Node(item, head);
+            ++size;
+        }
     }
 
     /**
@@ -89,20 +89,20 @@ public class SinglyLinkedList<T> implements Iterable<T>{
      */
     
     public void rightInsert(T item) {
-		if (isEmpty()) {
-			// if the list is empty we call a special helper method
-			// that sets both head and tail references to the same object
-			createFirstNode(item);
-		} else {
-			// creates a new Node whose next reference is null
-			Node newNode = new Node(item, null);
+        if (isEmpty()) {
+            // if the list is empty we call a special helper method
+            // that sets both head and tail references to the same object
+            createFirstNode(item);
+        } else {
+            // creates a new Node whose next reference is null
+            Node newNode = new Node(item, null);
 
-			// old tail Node points to new Node
-			tail.next = newNode;
-			// sets tail reference to the new Node
-			tail = newNode;
-			++size;
-		}
+            // old tail Node points to new Node
+            tail.next = newNode;
+            // sets tail reference to the new Node
+            tail = newNode;
+            ++size;
+        }
     }
 
     /**
@@ -115,35 +115,35 @@ public class SinglyLinkedList<T> implements Iterable<T>{
      */
     
     public void insertAt(T item, int ix) {
-		// tests ix
-		if(!isValidIndex(ix)) {
-			throw new NoSuchElementException("Invalid node number.");
-		}
+        // tests ix
+        if(!isValidIndex(ix)) {
+            throw new NoSuchElementException("Invalid node number.");
+        }
 
-		if (ix == 0) {
-			// if ix == 0, then it's just a leftInsert
-			leftInsert(item);
-		} else if (ix == size - 1) {
-			// if ix == size - 1, then it's just a rightInsert
-			rightInsert(item);	   
-		} else {
-			// traverses list to get previous and post Node references to
-			// insert the new Node between these Nodes.
-			Node previousNode = getNodeAt(ix - 1);
-			Node postNode = previousNode.next;
+        if (ix == 0) {
+            // if ix == 0, then it's just a leftInsert
+            leftInsert(item);
+        } else if (ix == size - 1) {
+            // if ix == size - 1, then it's just a rightInsert
+            rightInsert(item);         
+        } else {
+            // traverses list to get previous and post Node references to
+            // insert the new Node between these Nodes.
+            Node previousNode = getNodeAt(ix - 1);
+            Node postNode = previousNode.next;
 
-			// changes previous Node reference to the new Node
-			// which in turn points to the postNode reference
-			previousNode.next = new Node(item, postNode);
-			++size;
-		}
+            // changes previous Node reference to the new Node
+            // which in turn points to the postNode reference
+            previousNode.next = new Node(item, postNode);
+            ++size;
+        }
     }
 
     // helper method to create first Node when list is empty
     private void createFirstNode(T item) {
-		tail = new Node(item, null);
-		head = tail;
-		++size;
+        tail = new Node(item, null);
+        head = tail;
+        ++size;
     }
 
     /**
@@ -156,13 +156,13 @@ public class SinglyLinkedList<T> implements Iterable<T>{
      */
     
     public T getItemAt(int ix) {
-		if (!isValidIndex(ix)) {
-			throw new NoSuchElementException("Invalid node number.");
-		}
-	
-		Node node = getNodeAt(ix);
-	
-		return node.item;
+        if (!isValidIndex(ix)) {
+            throw new NoSuchElementException("Invalid node number.");
+        }
+        
+        Node node = getNodeAt(ix);
+        
+        return node.item;
     }
 
     /**
@@ -175,18 +175,18 @@ public class SinglyLinkedList<T> implements Iterable<T>{
      */
 
     public Node getNodeAt(int ix) {
-		if (!isValidIndex(ix)) {
-			throw new NoSuchElementException("Invalid node number.");
-		}
+        if (!isValidIndex(ix)) {
+            throw new NoSuchElementException("Invalid node number.");
+        }
 
-		Node node = head;
-		int counter = ix;
+        Node node = head;
+        int counter = ix;
 
-		for (int i = ix; i > 0; --i) {
-			node = node.next;
-		}
+        for (int i = ix; i > 0; --i) {
+            node = node.next;
+        }
 
-		return node;
+        return node;
     }
 
     /**
@@ -198,7 +198,7 @@ public class SinglyLinkedList<T> implements Iterable<T>{
      */
     
     public T pop() {
-		return removeAt(size - 1);
+        return removeAt(size - 1);
     }
 
     /**
@@ -212,126 +212,126 @@ public class SinglyLinkedList<T> implements Iterable<T>{
      */
     
     public T removeAt(int ix) {
-		if (!isValidIndex(ix)) {
-			throw new NoSuchElementException("Invalid node index.");
-		}
+        if (!isValidIndex(ix)) {
+            throw new NoSuchElementException("Invalid node index.");
+        }
 
-		if (size == 0) {
-			throw new NoSuchElementException("Empty list.");
-		}
-	
-		if (ix == 0) {
-			// creates a reference to the old head
-			Node oldHead = head;
-			// gets the old head's item
-			T item = oldHead.item;
-			// advances head reference to the next node (2nd on the list)
-			head = oldHead.next;
+        if (size == 0) {
+            throw new NoSuchElementException("Empty list.");
+        }
+        
+        if (ix == 0) {
+            // creates a reference to the old head
+            Node oldHead = head;
+            // gets the old head's item
+            T item = oldHead.item;
+            // advances head reference to the next node (2nd on the list)
+            head = oldHead.next;
 
-			// removes reference of the old head to the new first Node
-			oldHead.next = null;
-			--size;	    
+            // removes reference of the old head to the new first Node
+            oldHead.next = null;
+            --size;     
 
-			return item;
-		} else if (ix == size - 1) {
-			// traverses to one Node before the tail Node (ix - 2)
-			// which will become the new tail Node
-			Node newTail = getNodeAt(size - 2);
-			// get the oldTail's item
-			T item = tail.item;
+            return item;
+        } else if (ix == size - 1) {
+            // traverses to one Node before the tail Node (ix - 2)
+            // which will become the new tail Node
+            Node newTail = getNodeAt(size - 2);
+            // get the oldTail's item
+            T item = tail.item;
 
-			// sets newTail's next reference to null since now its the last Node
-			newTail.next = null;
-			// updates tail reference variable to the new tail (last) Node
-			tail = newTail;
-			--size;
+            // sets newTail's next reference to null since now its the last Node
+            newTail.next = null;
+            // updates tail reference variable to the new tail (last) Node
+            tail = newTail;
+            --size;
 
-			return item;
-		} else {
-			// gets a reference to the previous Node (ix - 1) -> O(N)
-			// gets a reference to the post Node (ix + 1) -> O(N)
-			// gets a reference to the desired Node to be removed (ix) -> O(N)
-			Node previousNode = getNodeAt(ix - 1);
-			Node currentNode = getNodeAt(ix);
-			Node postNode = getNodeAt(ix + 1);
-			// gets the item of the desired node to be removed
-			T item = currentNode.item;
+            return item;
+        } else {
+            // gets a reference to the previous Node (ix - 1) -> O(N)
+            // gets a reference to the post Node (ix + 1) -> O(N)
+            // gets a reference to the desired Node to be removed (ix) -> O(N)
+            Node previousNode = getNodeAt(ix - 1);
+            Node currentNode = getNodeAt(ix);
+            Node postNode = getNodeAt(ix + 1);
+            // gets the item of the desired node to be removed
+            T item = currentNode.item;
 
-			// makes the removed Node's next reference point to null
-			currentNode.next = null;
-			// makes previousNode's next reference point to the post Node (skip the removed Node)
-			previousNode.next = postNode;
-			--size;
+            // makes the removed Node's next reference point to null
+            currentNode.next = null;
+            // makes previousNode's next reference point to the post Node (skip the removed Node)
+            previousNode.next = postNode;
+            --size;
 
-			return item;
-		}
+            return item;
+        }
     }
 
     // helper method that returns true if an index is invalid.
     private boolean isValidIndex(int ix) {
-		if (ix < 0 || ix >= size) {
-			return false;
-		} else {
-			return true;
-		}
+        if (ix < 0 || ix >= size) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     // Iterable interface implementation for the SinglyLinkedList data structure.
     public Iterator<T> iterator() {
-		return new SinglyLinkedListIterator();
+        return new SinglyLinkedListIterator();
     }
     
     // Nested private class to create Iterator Objects for the SinglyLinkedList data structure.
     // Iterator interface implementation.
     private class SinglyLinkedListIterator implements Iterator {
-		Node currentNode;
+        Node currentNode;
 
-		public SinglyLinkedListIterator() {
-			currentNode = head;
-		}
+        public SinglyLinkedListIterator() {
+            currentNode = head;
+        }
 
-		public boolean hasNext() {
-			return currentNode != null;
-		}
+        public boolean hasNext() {
+            return currentNode != null;
+        }
 
-		public T next() {
-			T item = currentNode.item;
-			currentNode = currentNode.next;
+        public T next() {
+            T item = currentNode.item;
+            currentNode = currentNode.next;
 
-			return item;
-		}
+            return item;
+        }
 
-		public void remove() {
-			// nothing
-		}
+        public void remove() {
+            // nothing
+        }
     }    
 
     // unit testing
     public static void main(String[] args) {
-		SinglyLinkedList<Integer> sll = new SinglyLinkedList<Integer>();
+        SinglyLinkedList<Integer> sll = new SinglyLinkedList<Integer>();
 
-		sll.leftInsert(1);
-		sll.leftInsert(2);
-		sll.leftInsert(3);
-		sll.rightInsert(4);
+        sll.leftInsert(1);
+        sll.leftInsert(2);
+        sll.leftInsert(3);
+        sll.rightInsert(4);
 
-		sll.removeAt(1);
-		sll.removeAt(1);
-		sll.removeAt(1);
-		sll.pop();
+        sll.removeAt(1);
+        sll.removeAt(1);
+        sll.removeAt(1);
+        sll.pop();
 
-		sll.rightInsert(5);
-		sll.rightInsert(10);
-		sll.leftInsert(-2);
-		sll.removeAt(sll.size() - 1);
+        sll.rightInsert(5);
+        sll.rightInsert(10);
+        sll.leftInsert(-2);
+        sll.removeAt(sll.size() - 1);
 
-		// for (int i = 0; i < sll.size(); ++i) {
-		//     System.out.println(sll.getItemAt(i));
-		// }
+        // for (int i = 0; i < sll.size(); ++i) {
+        //     System.out.println(sll.getItemAt(i));
+        // }
 
-		for (int i : sll) {
-			System.out.println(i);
-		}
+        for (int i : sll) {
+            System.out.println(i);
+        }
 
     }
 }

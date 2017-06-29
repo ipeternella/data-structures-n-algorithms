@@ -30,7 +30,7 @@ public class Merge {
      */
     
     public static void sort(Comparable[] arr) {
-		sort(arr, 0, arr.length - 1);
+        sort(arr, 0, arr.length - 1);
     }
     
     /* 
@@ -42,25 +42,25 @@ public class Merge {
      */
     
     private static void sort(Comparable[] arr, int lo, int hi) {
-		// base case to stop recursion (abstract array has only one element)
-		if (hi <= lo) { return; }
+        // base case to stop recursion (abstract array has only one element)
+        if (hi <= lo) { return; }
 
-		// computes mid index based on lo and hi indexes
-		int mid = lo + (hi - lo)/2;
+        // computes mid index based on lo and hi indexes
+        int mid = lo + (hi - lo)/2;
 	
-		// sort method creates two abstract in place arrays recursively
-		// i.e. we can think of the arr reference as a reference to an array
-		// composed of two subarrays:
-		// left subarray [lo .. mid] index
-		// right subarray [mid + 1 .. hi] index
+        // sort method creates two abstract in place arrays recursively
+        // i.e. we can think of the arr reference as a reference to an array
+        // composed of two subarrays:
+        // left subarray [lo .. mid] index
+        // right subarray [mid + 1 .. hi] index
 	
-		// abstract left array
-		sort(arr, lo, mid);	
-		// abstract right array
-		sort(arr, mid + 1, hi);
+        // abstract left array
+        sort(arr, lo, mid);	
+        // abstract right array
+        sort(arr, mid + 1, hi);
 
-		// merge an array composed of two abstract in place subarrays
-		merge(arr, lo, mid, hi);
+        // merge an array composed of two abstract in place subarrays
+        merge(arr, lo, mid, hi);
     }
 
     /*
@@ -75,39 +75,39 @@ public class Merge {
      */
     
     private static void merge(Comparable[] arr, int lo, int mid, int hi) {
-		Comparable[] aux = new Comparable[arr.length];
-		int i = lo;           // beginning of the left inplace subarray
-		int j = mid + 1;      // beginning of the right inplace subarray
-		int k = lo;           // lower index of the abstract array
+        Comparable[] aux = new Comparable[arr.length];
+        int i = lo;           // beginning of the left inplace subarray
+        int j = mid + 1;      // beginning of the right inplace subarray
+        int k = lo;           // lower index of the abstract array
 
-		// creates aux array as a copy
-		for (int w = lo; w <= hi; ++w) {
-			aux[w] = arr[w];
-		}
+        // creates aux array as a copy
+        for (int w = lo; w <= hi; ++w) {
+            aux[w] = arr[w];
+        }
 	
-		// when the left array or right array have no more elements
-		// to merge (exhausted) this loop breaks
-		while (i <= mid && j <= hi) {
-			if (isLess(aux[i], aux[j])) {
-				// aux[i] < aux[j]
-				// we pick minimum value (i.e. aux[i]) of the left subarray of aux
-				arr[k++] = aux[i++];
-			} else {
-				// aux[i] > aux[j]
-				// we pick minimum value (i.e. aux[j]) of the right subarray of aux
-				arr[k++] = aux[j++];
-			}
-		}
+        // when the left array or right array have no more elements
+        // to merge (exhausted) this loop breaks
+        while (i <= mid && j <= hi) {
+            if (isLess(aux[i], aux[j])) {
+                // aux[i] < aux[j]
+                // we pick minimum value (i.e. aux[i]) of the left subarray of aux
+                arr[k++] = aux[i++];
+            } else {
+                // aux[i] > aux[j]
+                // we pick minimum value (i.e. aux[j]) of the right subarray of aux
+                arr[k++] = aux[j++];
+            }
+        }
 
-		// fill with the remaining elements of the left subarray
-		while (i <= mid) {
-			arr[k++] = aux[i++];
-		}
+        // fill with the remaining elements of the left subarray
+        while (i <= mid) {
+            arr[k++] = aux[i++];
+        }
 	
-		// fill with the remaining elements of the right subarray
-		while (j <= hi) {
-			arr[k++] = aux[j++];
-		}
+        // fill with the remaining elements of the right subarray
+        while (j <= hi) {
+            arr[k++] = aux[j++];
+        }
     }
 
     /*
@@ -119,11 +119,11 @@ public class Merge {
      */    
     
     private static void swap(Comparable[] arr, int ix1, int ix2) {
-		Comparable temp = arr[ix1];
-		System.out.println("Swapping: " + arr[ix1] + " <---> " + arr[ix2]);
+        Comparable temp = arr[ix1];
+        System.out.println("Swapping: " + arr[ix1] + " <---> " + arr[ix2]);
 	
-		arr[ix1] = arr[ix2];
-		arr[ix2] = temp;
+        arr[ix1] = arr[ix2];
+        arr[ix2] = temp;
     }
     
     /*
@@ -136,7 +136,7 @@ public class Merge {
      */
     
     private static boolean isLess(Comparable one, Comparable another) {
-		return one.compareTo(another) < 0; // -1 when less
+        return one.compareTo(another) < 0; // -1 when less
     }
 
     /**
@@ -147,13 +147,13 @@ public class Merge {
      */
     
     public static boolean isSorted(Comparable[] arr) {
-		for (int i = 0; i < arr.length - 1; ++i) {
-			if (!isLess(arr[i], arr[i + 1])) {
-				return false;
-			}
-		}
+        for (int i = 0; i < arr.length - 1; ++i) {
+            if (!isLess(arr[i], arr[i + 1])) {
+                return false;
+            }
+        }
 
-		return true;
+        return true;
     }
 
     /**
@@ -164,30 +164,30 @@ public class Merge {
      */
     
     public static void show(Comparable[] arr) {
-		System.out.print("[");
-		for (int i = 0; i < arr.length; ++i) {
-			if (i != arr.length - 1) {
-				System.out.print(arr[i] + ", ");
-			} else {
-				System.out.println(arr[i] + "]");
-			}	    	    
-		}
+        System.out.print("[");
+        for (int i = 0; i < arr.length; ++i) {
+            if (i != arr.length - 1) {
+                System.out.print(arr[i] + ", ");
+            } else {
+                System.out.println(arr[i] + "]");
+            }	    	    
+        }
     }
 
     // unit testing
     public static void main(String[] args) {
-		Integer[] arr = {3, 10, -1, 0, 5, 4, 15, 0, 7, 7};
-		//String[] arr = {"zzz", "ccc", "ddd", "eee", "aaa", "iii"};
+        Integer[] arr = {3, 10, -1, 0, 5, 4, 15, 0, 7, 7};
+        //String[] arr = {"zzz", "ccc", "ddd", "eee", "aaa", "iii"};
 
-		System.out.println("\nArray BEFORE sorting:");
-		show(arr);
+        System.out.println("\nArray BEFORE sorting:");
+        show(arr);
 	
-		System.out.println("\nSorting the array...\n");
-		Merge.sort(arr);
+        System.out.println("\nSorting the array...\n");
+        Merge.sort(arr);
 	
-		System.out.println("Array AFTER sorting:");
-		show(arr);
+        System.out.println("Array AFTER sorting:");
+        show(arr);
 
-		System.out.println();
+        System.out.println();
     }
 }

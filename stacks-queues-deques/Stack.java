@@ -24,8 +24,8 @@ public class Stack<T> implements Iterable<T>{
      */
     
     public Stack() {
-		singlyLinkedList = new SinglyLinkedList<T>();
-		size = 0;
+        singlyLinkedList = new SinglyLinkedList<T>();
+        size = 0;
     }
 
     /**
@@ -35,7 +35,7 @@ public class Stack<T> implements Iterable<T>{
      */
 
     public boolean isEmpty() {
-		return size == 0;
+        return size == 0;
     }
 
     /**
@@ -45,7 +45,7 @@ public class Stack<T> implements Iterable<T>{
      */
     
     public int size() {
-		return size;
+        return size;
     }
 
     /**
@@ -56,11 +56,11 @@ public class Stack<T> implements Iterable<T>{
      */
     
     public void push(T item) {
-		// inserts the item at the beginning of the singly linked list
-		// to follow LIFO policy
-		// O(1) operation
-		singlyLinkedList.leftInsert(item);
-		++size;
+        // inserts the item at the beginning of the singly linked list
+        // to follow LIFO policy
+        // O(1) operation
+        singlyLinkedList.leftInsert(item);
+        ++size;
     }
 
     /**
@@ -72,15 +72,15 @@ public class Stack<T> implements Iterable<T>{
      */
     
     public T pop() {
-		if (isEmpty()) {
-			throw new NoSuchElementException("Empty stack.");
-		}
+        if (isEmpty()) {
+            throw new NoSuchElementException("Empty stack.");
+        }
 	
-		--size;
+        --size;
 
-		// removes the last LEFT inserted item (top of the stack)
-		// which is a O(1) operation
-		return singlyLinkedList.removeAt(0);
+        // removes the last LEFT inserted item (top of the stack)
+        // which is a O(1) operation
+        return singlyLinkedList.removeAt(0);
     }
 
     /**
@@ -92,11 +92,11 @@ public class Stack<T> implements Iterable<T>{
      */
     
     public T peek() {
-		if (isEmpty()) {
-			throw new NoSuchElementException("Empty stack.");
-		}
+        if (isEmpty()) {
+            throw new NoSuchElementException("Empty stack.");
+        }
 	
-		return singlyLinkedList.getItemAt(0);
+        return singlyLinkedList.getItemAt(0);
     }
 
     /**
@@ -109,48 +109,48 @@ public class Stack<T> implements Iterable<T>{
      */
     
     public T getAt(int ix) {
-		if (!isValidIndex(ix)) {
-			throw new NoSuchElementException("Invalid stack index.");
-		}
+        if (!isValidIndex(ix)) {
+            throw new NoSuchElementException("Invalid stack index.");
+        }
 
-		// uses singly linked list method which is O(N)
-		return singlyLinkedList.getItemAt(ix);
+        // uses singly linked list method which is O(N)
+        return singlyLinkedList.getItemAt(ix);
     }
 
     // helper method that returns true if an index is invalid
     private boolean isValidIndex(int ix) {
-		if (ix < 0 || ix >= size) {
-			return false;
-		} else {
-			return true;
-		}
+        if (ix < 0 || ix >= size) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     // Iterable interface implementation for the stack data structure
     public Iterator<T> iterator() {
-		// returns the iterator from the SinglyLinkedList class
-		// which follows the Iterator<T> interface
-		return singlyLinkedList.iterator();
+        // returns the iterator from the SinglyLinkedList class
+        // which follows the Iterator<T> interface
+        return singlyLinkedList.iterator();
     }
 
     // unit testing
     public static void main(String[] args) {
-		Stack<Integer> s = new Stack<Integer>();
+        Stack<Integer> s = new Stack<Integer>();
 
-		s.push(1);
-		s.push(2);
-		s.push(3);
-		s.pop();
-		s.pop();
-		s.pop();
+        s.push(1);
+        s.push(2);
+        s.push(3);
+        s.pop();
+        s.pop();
+        s.pop();
 
-		s.push(-5);
-		s.push(-10);
+        s.push(-5);
+        s.push(-10);
 	
-		for (int i : s) {
-			System.out.println(i);
-		}
+        for (int i : s) {
+            System.out.println(i);
+        }
 
-		System.out.println(s.getAt(1));
+        System.out.println(s.getAt(1));
     }
 }

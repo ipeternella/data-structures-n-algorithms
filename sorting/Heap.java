@@ -41,28 +41,28 @@ public class Heap {
      */
     
     public static void sort(Comparable[] arr) {		
-		int heapSize = arr.length;
+        int heapSize = arr.length;
 
-		// builds a heap from a Comparable array elements
-		// starts at half of the array to use sink() on each subheap
-		// heapIndex is a virtual index of an abstract array that starts
-		// at index one with the same elements of arr
-		for (int heapIndex = heapSize/2; heapIndex >= 1; --heapIndex) {
-			sink(arr, heapIndex, heapSize);
-		}	
+        // builds a heap from a Comparable array elements
+        // starts at half of the array to use sink() on each subheap
+        // heapIndex is a virtual index of an abstract array that starts
+        // at index one with the same elements of arr
+        for (int heapIndex = heapSize/2; heapIndex >= 1; --heapIndex) {
+            sink(arr, heapIndex, heapSize);
+        }	
 
-		// applies heap sort on the heap array
-		while (heapSize > 1) {
-			// swaps biggest element (first) with the last one so
-			// last element goes to its right position at the end (sorted)
-			swap(arr, 1, heapSize);
-			// last element is sorted but it violates now the heap order
-			// so we reduce the heap size to ignore it in the next iterations
-			--heapSize;
-			// sink from the beginning of the heap till the end to reheapify
-			// the structure
-			sink(arr, 1, heapSize);
-		}
+        // applies heap sort on the heap array
+        while (heapSize > 1) {
+            // swaps biggest element (first) with the last one so
+            // last element goes to its right position at the end (sorted)
+            swap(arr, 1, heapSize);
+            // last element is sorted but it violates now the heap order
+            // so we reduce the heap size to ignore it in the next iterations
+            --heapSize;
+            // sink from the beginning of the heap till the end to reheapify
+            // the structure
+            sink(arr, 1, heapSize);
+        }
     }
 
     /*
@@ -76,42 +76,42 @@ public class Heap {
      */    
     
     private static void sink(Comparable[] arr, int heapIndex, int heapSize) {
-		// begins going down the heap if the startLevel node (parent) has
-		// at least a leftChild node so 2 * heapLevel < heapSize evals to true
-		// sinks down until heapLevel is bigger than the heapSize
-		while (2 * heapIndex <= heapSize) {
-			// heapIndex is a virtual index and so are leftChild and others	    
-			int parent = heapIndex;                    // parent node
-			int leftChild = 2 * heapIndex;             // first child node
+        // begins going down the heap if the startLevel node (parent) has
+        // at least a leftChild node so 2 * heapLevel < heapSize evals to true
+        // sinks down until heapLevel is bigger than the heapSize
+        while (2 * heapIndex <= heapSize) {
+            // heapIndex is a virtual index and so are leftChild and others	    
+            int parent = heapIndex;                    // parent node
+            int leftChild = 2 * heapIndex;             // first child node
 	    
-			// assumes leftChild is the biggest 
-			int biggestChild = leftChild;
+            // assumes leftChild is the biggest 
+            int biggestChild = leftChild;
 
-			// checks if the leftChild has a rightChild sibling
-			if (leftChild < heapSize) {
-				int rightChild = 2 * heapIndex + 1;        // second child node
+            // checks if the leftChild has a rightChild sibling
+            if (leftChild < heapSize) {
+                int rightChild = 2 * heapIndex + 1;        // second child node
 
-				// picks the biggest Sibling (right or left) to compare with parent
-				if (isLess(arr, leftChild, rightChild)) {
-					biggestChild = rightChild;
-				}
-			}
+                // picks the biggest Sibling (right or left) to compare with parent
+                if (isLess(arr, leftChild, rightChild)) {
+                    biggestChild = rightChild;
+                }
+            }
 	    
-			// if biggestChild is smaller than parent
-			// than it follows the heap order so break
-			if (isLess(arr, biggestChild, parent)) {
-				break;
-			} else {
-				// biggestChild is bigger than parent
-				// which violates heap order so swap
-				swap(arr, biggestChild, parent);
-			}
+            // if biggestChild is smaller than parent
+            // than it follows the heap order so break
+            if (isLess(arr, biggestChild, parent)) {
+                break;
+            } else {
+                // biggestChild is bigger than parent
+                // which violates heap order so swap
+                swap(arr, biggestChild, parent);
+            }
 	    	    
-			// advances to biggest child
-			// which will become the next parent
-			// to move down on the heap for then next iteration
-			heapIndex = biggestChild;
-		}
+            // advances to biggest child
+            // which will become the next parent
+            // to move down on the heap for then next iteration
+            heapIndex = biggestChild;
+        }
     }
 
     /*
@@ -123,15 +123,15 @@ public class Heap {
      */    
     
     private static void swap(Comparable[] arr, int ix1, int ix2) {
-		// corrects virtual indexes of heap sort to
-		// map to real indexes of 0 based java arrays
-		--ix1;
-		--ix2;
+        // corrects virtual indexes of heap sort to
+        // map to real indexes of 0 based java arrays
+        --ix1;
+        --ix2;
 	
-		Comparable temp = arr[ix1];
+        Comparable temp = arr[ix1];
 	
-		arr[ix1] = arr[ix2];
-		arr[ix2] = temp;
+        arr[ix1] = arr[ix2];
+        arr[ix2] = temp;
     }
     
     /*
@@ -144,12 +144,12 @@ public class Heap {
      */
     
     private static boolean isLess(Comparable[] arr, int ix1, int ix2) {
-		// corrects virtual indexes of heap sort to
-		// map to real indexes of 0 based java arrays
-		--ix1;
-		--ix2;
+        // corrects virtual indexes of heap sort to
+        // map to real indexes of 0 based java arrays
+        --ix1;
+        --ix2;
 	
-		return arr[ix1].compareTo(arr[ix2]) < 0; // -1 when less
+        return arr[ix1].compareTo(arr[ix2]) < 0; // -1 when less
     }
 
     /**
@@ -160,13 +160,13 @@ public class Heap {
      */
     
     public static boolean isSorted(Comparable[] arr) {
-		for (int i = 0; i < arr.length - 1; ++i) {
-			if (!isLess(arr, i, i + 1)) {
-				return false;
-			}
-		}
+        for (int i = 0; i < arr.length - 1; ++i) {
+            if (!isLess(arr, i, i + 1)) {
+                return false;
+            }
+        }
 
-		return true;
+        return true;
     }
 
     /**
@@ -177,31 +177,31 @@ public class Heap {
      */
     
     public static void show(Comparable[] arr) {
-		System.out.print("[");
-		for (int i = 0; i < arr.length; ++i) {
-			if (i != arr.length - 1) {
-				System.out.print(arr[i] + ", ");
-			} else {
-				System.out.println(arr[i] + "]");
-			}	    	    
-		}
+        System.out.print("[");
+        for (int i = 0; i < arr.length; ++i) {
+            if (i != arr.length - 1) {
+                System.out.print(arr[i] + ", ");
+            } else {
+                System.out.println(arr[i] + "]");
+            }	    	    
+        }
     }
 
     // unit testing
     public static void main(String[] args) {
-		Integer[] arr = {3, 10, -1, 0, 5, 4, 15, 0, 7, 7};
-		//String[] arr = {"zzz", "ccc", "ddd", "eee", "aaa", "iii"};
+        Integer[] arr = {3, 10, -1, 0, 5, 4, 15, 0, 7, 7};
+        //String[] arr = {"zzz", "ccc", "ddd", "eee", "aaa", "iii"};
 
-		System.out.println("\nArray BEFORE sorting:");
-		show(arr);
+        System.out.println("\nArray BEFORE sorting:");
+        show(arr);
 	
-		System.out.println("\nSorting the array...\n");
+        System.out.println("\nSorting the array...\n");
         Heap.sort(arr);
 	
-		System.out.println("Array AFTER sorting:");
-		show(arr);
+        System.out.println("Array AFTER sorting:");
+        show(arr);
 
-		System.out.println();
+        System.out.println();
     }
 }
 

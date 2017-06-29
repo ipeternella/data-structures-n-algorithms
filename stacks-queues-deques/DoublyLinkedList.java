@@ -19,17 +19,17 @@ public class DoublyLinkedList<T> implements Iterable<T> {
     
     // nested class to represent doubly linked nodes
     private class Node {
-		T item;           // item that the Node holds
-		Node next;        // reference to the next Node
-		Node previous;    // reference to the previous Node
+        T item;           // item that the Node holds
+        Node next;        // reference to the next Node
+        Node previous;    // reference to the previous Node
 
-		// constructor takes an item and a reference to the previous AND next Node
-		// as arguments to build a new Node on the heap
-		public Node(T item, Node previous, Node next) {
-			this.item = item;
-			this.previous = previous;
-			this.next = next;
-		}
+        // constructor takes an item and a reference to the previous AND next Node
+        // as arguments to build a new Node on the heap
+        public Node(T item, Node previous, Node next) {
+            this.item = item;
+            this.previous = previous;
+            this.next = next;
+        }
     }
 
     /**
@@ -38,9 +38,9 @@ public class DoublyLinkedList<T> implements Iterable<T> {
      */
     
     public DoublyLinkedList() {
-		size = 0;
-		head = null;
-		tail = null;
+        size = 0;
+        head = null;
+        tail = null;
     }
 
     /**
@@ -50,7 +50,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
      */
 
     public int size() {
-		return size;
+        return size;
     }
 
     /**
@@ -60,7 +60,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
      */
 
     public boolean isEmpty() {
-		return size == 0;
+        return size == 0;
     }
 
     /**
@@ -71,21 +71,21 @@ public class DoublyLinkedList<T> implements Iterable<T> {
      */
 
     public void leftInsert(T item) {
-		if (isEmpty()) {
-			// if the list is empty we call a special helper method
-			// that sets both head and tail references to the same object
-			createFirstNode(item);
-		} else {
-			// creates a newNode to be inserted whose previous
-			// reference is null (will become the first Node of the list)
-			// and its next reference to the old head
-			Node newNode = new Node(item, null, head);
-			// sets old head's previous reference to the newNode
-			head.previous = newNode;
-			// changes head reference to the new Node
-			head = newNode;
-			++size;
-		}
+        if (isEmpty()) {
+            // if the list is empty we call a special helper method
+            // that sets both head and tail references to the same object
+            createFirstNode(item);
+        } else {
+            // creates a newNode to be inserted whose previous
+            // reference is null (will become the first Node of the list)
+            // and its next reference to the old head
+            Node newNode = new Node(item, null, head);
+            // sets old head's previous reference to the newNode
+            head.previous = newNode;
+            // changes head reference to the new Node
+            head = newNode;
+            ++size;
+        }
     }
 
     /**
@@ -96,20 +96,20 @@ public class DoublyLinkedList<T> implements Iterable<T> {
      */
 
     public void rightInsert(T item) {
-		// if the list is empty we call a special helper method
-		// that sets both head and tail references to the same object	
+        // if the list is empty we call a special helper method
+        // that sets both head and tail references to the same object	
     	if (isEmpty()) {
     	    createFirstNode(item);
     	} else {
-			// creates a new Node to be inserted whose previous reference
-			// points to the old tail and next references points to null (will become the last Node)
-			Node newNode = new Node(item, tail, null);
+            // creates a new Node to be inserted whose previous reference
+            // points to the old tail and next references points to null (will become the last Node)
+            Node newNode = new Node(item, tail, null);
 	    
-			// sets old tail reference to point to the new Node
-			tail.next = newNode;
-			// changes tail reference to point to the new Node
-			tail = newNode;
-			++size;
+            // sets old tail reference to point to the new Node
+            tail.next = newNode;
+            // changes tail reference to point to the new Node
+            tail = newNode;
+            ++size;
     	}
     }
 
@@ -128,33 +128,33 @@ public class DoublyLinkedList<T> implements Iterable<T> {
     	}
     
     	if (ix == 0) {
-			// if ix == 0, then it's just a leftInsert
+            // if ix == 0, then it's just a leftInsert
     	    leftInsert(item);
     	} else if (ix == size - 1) {
-			// if ix == size - 1, then it's just a rightInsert
+            // if ix == size - 1, then it's just a rightInsert
     	    rightInsert(item);	   
     	} else {
-			// traverses list to get previous and post Node references to
-			// insert the new Node between these two.
-			Node previousNode = getNodeAt(ix - 1);
-			Node postNode = getNodeAt(ix);
+            // traverses list to get previous and post Node references to
+            // insert the new Node between these two.
+            Node previousNode = getNodeAt(ix - 1);
+            Node postNode = getNodeAt(ix);
 
-			// creates a newNode between previousNode and postNode
-			Node newNode = new Node(item, previousNode, postNode);
+            // creates a newNode between previousNode and postNode
+            Node newNode = new Node(item, previousNode, postNode);
 
-			// adjusts previousNode's next reference to point to the newNode
-			// and postNode's previous reference to point to the newNode
-			previousNode.next = newNode;
-			postNode.previous = newNode;
-			++size;
+            // adjusts previousNode's next reference to point to the newNode
+            // and postNode's previous reference to point to the newNode
+            previousNode.next = newNode;
+            postNode.previous = newNode;
+            ++size;
     	}
     }
 
     // helper method to create first Node when list is empty
     private void createFirstNode(T item) {
-		head = new Node(item, null, null);
-		tail = head;
-		++size;
+        head = new Node(item, null, null);
+        tail = head;
+        ++size;
     }
 
     /**
@@ -167,9 +167,9 @@ public class DoublyLinkedList<T> implements Iterable<T> {
      */
     
     public T getItemAt(int ix) {
-		if (!isValidIndex(ix)) {
-			throw new NoSuchElementException("Invalid node number.");
-		}
+        if (!isValidIndex(ix)) {
+            throw new NoSuchElementException("Invalid node number.");
+        }
 	
     	Node node = getNodeAt(ix);
 	
@@ -227,118 +227,118 @@ public class DoublyLinkedList<T> implements Iterable<T> {
     	    throw new NoSuchElementException("Invalid node number.");
     	}
 
-		if (size == 0) {
-			throw new NoSuchElementException("Empty linked list.");
-		}
+        if (size == 0) {
+            throw new NoSuchElementException("Empty linked list.");
+        }
 	
     	if (ix == 0) {
-			// creates newNode reference that points to the second Node of the list
-			Node newHead = head.next;
-			// saves last head's item
-			T item = head.item;
+            // creates newNode reference that points to the second Node of the list
+            Node newHead = head.next;
+            // saves last head's item
+            T item = head.item;
 
-			// makes newNode's previous reference null (will become the first Node)
-			newHead.previous = null;
-			// removes old head's reference to the second Node (newHead)
-			head.next = null;
-			// sets head reference to the newHead;
-			head = newHead;
-			--size;
+            // makes newNode's previous reference null (will become the first Node)
+            newHead.previous = null;
+            // removes old head's reference to the second Node (newHead)
+            head.next = null;
+            // sets head reference to the newHead;
+            head = newHead;
+            --size;
 
-			return item;
+            return item;
     	} else if (ix == size - 1) {
-			// creates a new reference to the Node before the tail Node (newTail)
-			Node newTail = tail.previous;
-			// save tail's item
-			T item = tail.item;
+            // creates a new reference to the Node before the tail Node (newTail)
+            Node newTail = tail.previous;
+            // save tail's item
+            T item = tail.item;
 
-			// sets newTail's next reference to null (will become the last Node)
-			newTail.next = null;
-			// sets old Tail's reference to point to null (gbc)
-			tail.previous = null;
-			// sets tail reference var to point to the newTail Node
-			tail = newTail;
-			--size;
+            // sets newTail's next reference to null (will become the last Node)
+            newTail.next = null;
+            // sets old Tail's reference to point to null (gbc)
+            tail.previous = null;
+            // sets tail reference var to point to the newTail Node
+            tail = newTail;
+            --size;
 
-			return item;
+            return item;
     	} else {
-			// gets a reference to the previous Node (ix - 1) -> O(N)
-			// gets a reference to the post Node (ix + 1) -> O(N)
-			// gets a reference to the desired Node to be removed (ix) -> O(N)	    
-			Node previousNode = getNodeAt(ix - 1);
-			Node currentNode = getNodeAt(ix);
-			Node postNode = getNodeAt(ix + 1);
-			// gets the item of the desired Node to be removed
-			T item = currentNode.item;
+            // gets a reference to the previous Node (ix - 1) -> O(N)
+            // gets a reference to the post Node (ix + 1) -> O(N)
+            // gets a reference to the desired Node to be removed (ix) -> O(N)	    
+            Node previousNode = getNodeAt(ix - 1);
+            Node currentNode = getNodeAt(ix);
+            Node postNode = getNodeAt(ix + 1);
+            // gets the item of the desired Node to be removed
+            T item = currentNode.item;
 
-			// adjusts previousNode's next reference to point to postNode
-			previousNode.next = postNode;
-			// adjusts postNode's previous reference to point to previousNode
-			postNode.previous = previousNode;
+            // adjusts previousNode's next reference to point to postNode
+            previousNode.next = postNode;
+            // adjusts postNode's previous reference to point to previousNode
+            postNode.previous = previousNode;
 
-			// eliminates removed Node's references to previousNode and postNode
-			currentNode.next = null;
-			currentNode.previous = null;
-			--size;
+            // eliminates removed Node's references to previousNode and postNode
+            currentNode.next = null;
+            currentNode.previous = null;
+            --size;
 
-			return item;
+            return item;
     	}
     }
 
     // helper method that returns true if an index is invalid.
     private boolean isValidIndex(int ix) {
-		if (ix < 0 || ix >= size) {
-			return false;
-		} else {
-			return true;
-		}
+        if (ix < 0 || ix >= size) {
+            return false;
+        } else {
+            return true;
+        }
     }
     
     // Iterable interface implementation for DoublyLinkedList data structure.
     public Iterator<T> iterator() {
-		return new DoublyLinkedListIterator();
+        return new DoublyLinkedListIterator();
     }
     
     // Nested private class to create Iterator Objects for the DoublyLinkedList data structure.
     // Iterator interface implementation.
     private class DoublyLinkedListIterator implements Iterator {
-		Node currentNode;
+        Node currentNode;
 
-		public DoublyLinkedListIterator() {
-			currentNode = head;
-		}
+        public DoublyLinkedListIterator() {
+            currentNode = head;
+        }
 
-		public boolean hasNext() {
-			return currentNode != null;
-		}
+        public boolean hasNext() {
+            return currentNode != null;
+        }
 
-		public T next() {
-			T item = currentNode.item;
-			currentNode = currentNode.next;
+        public T next() {
+            T item = currentNode.item;
+            currentNode = currentNode.next;
 
-			return item;
-		}
+            return item;
+        }
 
-		public void remove() {
-			// unsupported
-		}
+        public void remove() {
+            // unsupported
+        }
     }
 
     // unit testing
     public static void main(String[] args) {
-		DoublyLinkedList<Integer> dll = new DoublyLinkedList<Integer>();
+        DoublyLinkedList<Integer> dll = new DoublyLinkedList<Integer>();
 
-		dll.leftInsert(1);
-		dll.leftInsert(2);
-		dll.leftInsert(3);
-		dll.rightInsert(-5);
-		dll.insertAt(-77, 2);
+        dll.leftInsert(1);
+        dll.leftInsert(2);
+        dll.leftInsert(3);
+        dll.rightInsert(-5);
+        dll.insertAt(-77, 2);
 
-		dll.removeAt(2);
-		dll.rightInsert(10);
+        dll.removeAt(2);
+        dll.rightInsert(10);
 	
-		for (int i : dll) {
-			System.out.println(i);
-		}
+        for (int i : dll) {
+            System.out.println(i);
+        }
     }
 }
