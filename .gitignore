@@ -8,4 +8,4 @@
 # eclipse .files and build output folder
 .*
 /bin/
-
+/dsa-bin/
