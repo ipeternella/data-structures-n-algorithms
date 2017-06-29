@@ -19,6 +19,9 @@
  * @date 06-05-2017
  */
 
+package Sorting;
+
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class Insertion {
 
     /**

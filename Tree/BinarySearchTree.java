@@ -1,6 +1,3 @@
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 /**
  * This class consists of an implementation of a Binary Search Tree data structure which
  * uses a helper nested class Node to represent the nodes of the tree. Each node 
@@ -18,6 +15,10 @@ import java.util.NoSuchElementException;
  * @author Igor G. Peternella
  * @date 06-20-2017
  */
+
+package Tree;
+
+import StackQueueDeque.Queue;
 
 public class BinarySearchTree<K extends Comparable<K>, V> {
     
@@ -270,7 +271,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
     	    else               { return local; }
     	}
     }
-
+    
     /*
      * Convenience method that prints a tree. Prints each complete level KEYS.
      * Uses a queue as a helper data structure.

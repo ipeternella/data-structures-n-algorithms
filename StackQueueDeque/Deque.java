@@ -1,6 +1,3 @@
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 /**
  * This class consists of an implementation of a deque data structure
  * which is built on the top of a doubly linked list data structure to support
@@ -13,6 +10,12 @@ import java.util.NoSuchElementException;
  * @author Igor G. Peternella
  * @date 06-03-2017
  */
+
+package StackQueueDeque;
+
+import LinkedList.DoublyLinkedList;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class Deque<T> implements Iterable<T> {
     

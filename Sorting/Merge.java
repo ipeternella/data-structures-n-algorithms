@@ -19,6 +19,9 @@
  * @date 06-05-2017
  */
 
+package Sorting;
+
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class Merge {
 
     /**
@@ -110,22 +113,6 @@ public class Merge {
         }
     }
 
-    /*
-     * Swaps two elements of a Comparable array.
-     * 
-     * arr is a reference to a Comparable array.
-     * ix1 is the index of the first element to be swapped on the array.
-     * ix2 is the index of the second element to be swapped on the array.
-     */    
-    
-    private static void swap(Comparable[] arr, int ix1, int ix2) {
-        Comparable temp = arr[ix1];
-        System.out.println("Swapping: " + arr[ix1] + " <---> " + arr[ix2]);
-	
-        arr[ix1] = arr[ix2];
-        arr[ix2] = temp;
-    }
-    
     /*
      * Compares two Comparables objects.
      * 

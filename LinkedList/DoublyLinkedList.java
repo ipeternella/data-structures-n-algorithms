@@ -1,3 +1,5 @@
+package LinkedList;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -191,7 +193,6 @@ public class DoublyLinkedList<T> implements Iterable<T> {
         }
 
         Node node = head;
-        int counter = ix;
 
         for (int i = ix; i > 0; --i) {
             node = node.next;
@@ -301,7 +302,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
     
     // Nested private class to create Iterator Objects for the DoublyLinkedList data structure.
     // Iterator interface implementation.
-    private class DoublyLinkedListIterator implements Iterator {
+    private class DoublyLinkedListIterator implements Iterator<T> {
         Node currentNode;
 
         public DoublyLinkedListIterator() {

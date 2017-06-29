@@ -18,7 +18,9 @@
  * @author Igor G. Peternella
  * @date 06-05-2017
  */
+package Sorting;
 
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class Heap {
 
     /** 
@@ -39,7 +41,7 @@ public class Heap {
      *
      * @param arr is a reference to a Comparable array.
      */
-    
+	
     public static void sort(Comparable[] arr) {		
         int heapSize = arr.length;
 

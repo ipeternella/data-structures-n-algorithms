@@ -1,5 +1,6 @@
+package DynamicArray;
+
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 /**
  * This class consists of an implementation of the dynamic array data structure which
@@ -25,6 +26,7 @@ public class DynamicArray<T> implements Iterable<T>{
      * main array of this data structure as a new Object[] type which is cast into T[] type. 
      */
     
+    @SuppressWarnings("unchecked")
     public DynamicArray() {
         size = 0;
         arr = (T[]) new Object[INITIAL_SIZE];
@@ -178,7 +180,9 @@ public class DynamicArray<T> implements Iterable<T>{
     }
 
     // resize helper method that copies every element of the current array into a new array
-    // with a bigger of small capacity given by the argument newCapacity.    
+    // with a bigger of small capacity given by the argument newCapacity.
+    
+    @SuppressWarnings("unchecked")
     private void resize(int newCapacity) {
         T[] newArr = (T[]) new Object[newCapacity];
 

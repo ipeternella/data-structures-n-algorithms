@@ -1,3 +1,5 @@
+package LinkedList;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -180,7 +182,6 @@ public class SinglyLinkedList<T> implements Iterable<T>{
         }
 
         Node node = head;
-        int counter = ix;
 
         for (int i = ix; i > 0; --i) {
             node = node.next;
@@ -283,7 +284,7 @@ public class SinglyLinkedList<T> implements Iterable<T>{
     
     // Nested private class to create Iterator Objects for the SinglyLinkedList data structure.
     // Iterator interface implementation.
-    private class SinglyLinkedListIterator implements Iterator {
+    private class SinglyLinkedListIterator implements Iterator<T> {
         Node currentNode;
 
         public SinglyLinkedListIterator() {

@@ -1,6 +1,3 @@
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 /**
  * This class consists of an implementation of a priority queue data structure
  * which is built on the top of a dynamic array structure which is interpreted
@@ -23,6 +20,11 @@ import java.util.NoSuchElementException;
  * @author Igor G. Peternella
  * @date 06-10-2017
  */
+
+package PriorityQueue;
+
+import java.util.Iterator;
+import DynamicArray.DynamicArray;
 
 public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
         
@@ -245,6 +247,7 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
      * false otherwise.
      */
     
+    @SuppressWarnings({"rawtypes", "unchecked"})
     private boolean isLess(int ix1, int ix2) {
         // corrects virtual indexes of the heap to
         // map to real indexes of 0 based java arrays (which DynamicArray is based)
@@ -254,7 +257,7 @@ public class PriorityQueue<T extends Comparable<T>> implements Iterable<T> {
         // gets the items at the real index from the Dynamic Array
         Comparable one = pq.getAt(ix1);
         Comparable another = pq.getAt(ix2);
-	
+
         return one.compareTo(another) < 0; // -1 when less
     }
 

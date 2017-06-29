@@ -1,6 +1,3 @@
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 /**
  * This class consists of an implementation of a queue data structure (follows FIFO policy) 
  * which is built on the top of a singly linked list data structure.
@@ -12,6 +9,12 @@ import java.util.NoSuchElementException;
  * @author Igor G. Peternella
  * @date 06-02-2017
  */
+
+package StackQueueDeque;
+
+import LinkedList.SinglyLinkedList;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class Queue<T> implements Iterable<T> {
 
