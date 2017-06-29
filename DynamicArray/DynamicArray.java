@@ -1,7 +1,3 @@
-package DynamicArray;
-
-import java.util.Iterator;
-
 /**
  * This class consists of an implementation of the dynamic array data structure which
  * uses a common array as the main data structure for the algorithms.
@@ -14,6 +10,10 @@ import java.util.Iterator;
  * @author Igor G. Peternella
  * @date 05-30-2017
  */
+
+package DynamicArray;
+
+import java.util.Iterator;
 
 public class DynamicArray<T> implements Iterable<T>{
 

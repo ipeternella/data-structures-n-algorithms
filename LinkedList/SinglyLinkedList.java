@@ -1,8 +1,3 @@
-package LinkedList;
-
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 /**
  * This class consists of an implementation of a singly linked list data structure which
  * uses a helper nested class Node to represent the nodes of the list.
@@ -12,6 +7,11 @@ import java.util.NoSuchElementException;
  * @author Igor G. Peternella
  * @date 05-30-2017
  */
+
+package LinkedList;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class SinglyLinkedList<T> implements Iterable<T>{
 

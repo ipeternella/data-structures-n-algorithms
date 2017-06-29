@@ -4,8 +4,6 @@
  * This class implements the Iterable interface which uses SinglyLinkedList class.
  * iterator.
  *
- * [!] Make sure that SinglyLinkedList.java is in the same directory as this file [!]
- *
  * @author Igor G. Peternella
  * @date 06-03-2017
  */

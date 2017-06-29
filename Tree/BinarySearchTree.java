@@ -7,9 +7,6 @@
  * This class uses the parametric K type for keys and V type for values.
  * This class has a reference to the root of the tree.
  *
- * [!] Make sure that Queue.java and its dependency SinglyLinkedList.java is in the same directory as this file [!]
- * (The queue is just used for a printing algorithm).
- *
  * Based on Algorithms (4th ed.) by Robert Sedgewick and Kevin Wayne.
  *
  * @author Igor G. Peternella

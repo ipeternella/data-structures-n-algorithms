@@ -15,8 +15,6 @@
  * Methods isLess() and swap() have been implemented to subtract 1 from the virtual indexes passed
  * to these methods to map to the real elements of the DynamicArray.
  * 
- * [!] Make sure that DynamicArray.java is in the same directory as this file [!]
- *
  * @author Igor G. Peternella
  * @date 06-10-2017
  */

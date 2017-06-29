@@ -5,8 +5,6 @@
  * This class implements the Iterable interface which uses DoublyLinkedList class
  * iterator.
  *
- * [!] Make sure that DoublyLinkedList.java is in the same directory as this file [!]
- *
  * @author Igor G. Peternella
  * @date 06-03-2017
  */

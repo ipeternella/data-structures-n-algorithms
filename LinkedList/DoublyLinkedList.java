@@ -1,8 +1,3 @@
-package LinkedList;
-
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 /**
  * This class consists of an implementation of a doubly linked list data structure which
  * uses a helper nested class Node to represent the nodes of the list.
@@ -12,6 +7,11 @@ import java.util.NoSuchElementException;
  * @author Igor G. Peternella
  * @date 06-01-2017
  */
+
+package LinkedList;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class DoublyLinkedList<T> implements Iterable<T> {
 
