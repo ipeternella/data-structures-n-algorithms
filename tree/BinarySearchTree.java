@@ -6,6 +6,9 @@
  *
  * This class uses the parametric K type for keys and V type for values.
  * This class has a reference to the root of the tree.
+ * 
+ * This class represents an efficient ordered symbol table whose average case 
+ * is O(Log(N)) compares for random inserts. For very specific cases the worst case may be O(N).
  *
  * Based on Algorithms (4th ed.) by Robert Sedgewick and Kevin Wayne.
  *
@@ -196,8 +199,8 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
      */
 
     private Node min(Node x) {
-        if (x.left == null) return x;
-        else return min(x.left);
+        if (x.left == null) { return x; }
+        else { return min(x.left); }
     }
 
     /**
@@ -215,33 +218,34 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
      */
 
     private Node max(Node x) {
-        if (x.right == null) return x;
-        else return max(x.right);
+        if (x.right == null) { return x; }
+        else { return max(x.right); }
     }
 
     /**
      * Returns the floor of a given key on the BST. Floor is the largest key on the
-     * BST but smaller than the given key or equal.
+     * BST but also less than or equal to the given key.
      *
      * @param key is the key whose floor is desired.
-     * @return the floor key.
+     * @return the floor of the argument key or null if there's no such value.
      */
     
     public K floor(K key) {
         Node retNode = floor(key, root);
 	
-        // empty tree nothing to test
-        if (retNode == null) return null;
-		
+        // empty tree or search key is too small
+        if (retNode == null) { return null; }
+
+        // returns the key of the returned Node from the helper method	
         return retNode.key;
     }
     
     /*
      * Helper recursive function to return the floor of a given key on the BST.
      *
-     * param key is the key whose floor is desired
-     * param x is the current root of the subtree
-     * return the node with the floor key of the desired floorKey
+     * param key is the key whose floor is desired.
+     * param x is the current root of the subtree.
+     * return the node with the floor key or null.
      */
 
     private Node floor(K key, Node x) {
@@ -249,25 +253,210 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
     	// compares 
     	int cmp = key.compareTo(x.key);
 
-    	// node's key is bigger than search key
-    	// look at the left subtree for smaller key
-    	if      (cmp < 0)  { return floor(key, x.left); }
+    	// node's key is bigger than the search key
+    	// look at the left subtree for smaller key which can be the floor
+    	if (cmp < 0)  { return floor(key, x.left); }
+    	
     	// return this node if the same key has been found (floor is key which is less or EQUAL)
     	else if (cmp == 0) { return x; }
-    	// node's key is smaller than search key = could be floor
-    	// look at the right subtree for bigger key
+    	
+    	// node's key is smaller than search key (floor candidate)
+    	// look at the right subtree for bigger key (we look for largest key but smaller than search key)
     	else {
     	    // local Node binding
     	    Node local = floor(key, x.right);
 
-    	    // if local is null then the x reference
-    	    // holds the floor key. Hence, return x.
+    	    // guarantees that null node or that every node whose key
+    	    // is bigger than search key will be ignored
     	    if (local == null) { return x; }
 
     	    // if local is not null return its value
-    	    else               { return local; }
+    	    else { return local; }
     	}
     }
+    
+     /**
+     * Returns the ceiling of a given key on the BST. Ceiling is the smallest key on the
+     * BST but also larger than or equal to the given key.
+     *
+     * @param key is the key whose ceiling is desired.
+     * @return the ceiling of the key argument or null if there's no such value.
+     */
+    
+    public K ceiling(K key) {
+        Node retNode = ceiling(key, root);
+	
+        // empty tree or search key is too small
+        if (retNode == null) { return null; }
+		
+        // returns the key of the returned from the helper method
+        return retNode.key;
+    }
+    
+    /*
+     * Helper recursive function to return the ceiling of a given key on the BST.
+     * This method is just a copy of the floor() method but with reversed comparisons.
+     *
+     * param key is the key whose ceiling is desired.
+     * param x is the current root of the subtree.
+     * return the node with the ceiling key or null.
+     */
+
+    private Node ceiling(K key, Node x) {
+    	// null Node
+    	if (x == null) { return null; }
+    	
+    	// compares given key with Node's key 
+    	int cmp = key.compareTo(x.key);
+
+    	// search key is larger than Node's key
+    	// look at the right subtree for a larger key which can be the ceiling
+    	if (cmp > 0)  { return ceiling(key, x.right); }
+    	
+    	// return this node if the same key has been found    	
+    	else if (cmp == 0) { return x; }
+    	
+    	// search key is smaller than Node's key (ceiling candidate)
+    	// look at the left subtree for smaller keys (we look for smallest key but bigger than search key)
+    	else {
+    	    // local Node binding
+    	    Node local = ceiling(key, x.left);
+
+    	    // guarantees that null node or that every node whose key
+    	    // is smaller than search key will be ignored
+    	    if (local == null) { return x; }
+
+    	    // if local is not null return its value
+    	    else { return local; }
+    	}
+    }
+    
+    /**
+     * Deletes the node with the smallest key on the BST.
+     */
+    
+    public void deleteMin() {
+    	// sends the root to the algorithm
+    	root = deleteMin(root);
+    }
+
+    /*
+     * deleteMin() recursive helper method. Traverses down the tree using the left links
+     * until a node with null left link is found (smallest key on BST) and its right subtree
+     * is used to overwrite its parent Node left link.
+     *
+     * param x is a Node reference to a subtree on the BST.
+     */
+    
+    private Node deleteMin(Node x) {    	
+    	if (x.left == null) {
+    		// smallest key
+    		// return its right subtree
+    		System.out.println("Deleted min key: " + x.key);
+    		return x.right; 
+    	} else { 
+    		// rewrites all left links
+    		x.left = deleteMin(x.left);
+    		// corrects sizes
+    		x.size = size(x.left) + size(x.right);
+    		// return itself
+    		return x;
+    	}
+    }
+    
+    /**
+     * Deletes the node with the largest key on the BST.
+     */
+    
+    public void deleteMax() {
+    	// sends the root to the algorithm
+    	root = deleteMax(root);
+    }
+
+    /*
+     * deleteMax() recursive helper method. Traverses down the tree using the right links
+     * until a node with null right link is found (largest key on BST) and its left subtree
+     * is used to overwrite its parent Node right link.
+     *
+     * param x is a Node reference to a subtree on the BST.
+     */
+    
+    private Node deleteMax(Node x) {    	
+    	if (x.right == null) {
+    		// largest key
+    		// returns its left subtree
+    		System.out.println("Deleted max key: " + x.key);
+    		return x.left;
+    	} else {
+    		// rewrites all left links
+    		x.right = deleteMax(x.right);
+    		// corrects sizes
+    		x.size = size(x.left) + size(x.right);
+    		// return itself
+    		return x;
+    	}
+    }
+    
+    /**
+     * Deletes a node associated with a given key.
+     * 
+     * @param key is the key to be deleted.
+     */
+    
+    public void delete(K key) {
+    	root = delete(key, root);
+    }
+    
+    private Node delete(K key, Node x) {
+    	// if x is a null node (recursion base case)
+    	if (x == null) { return null; }
+    	
+    	// comparison value
+    	int cmp = key.compareTo(x.key);
+    	
+    	// Node's key is bigger than search key
+    	// rewrites x.left reference (will rewrite tree the skip deleted one)
+    	if (cmp < 0) { x.left = delete(key, x.left); }
+    	
+    	// Node's key is smaller than search key
+    	// rewrites x.right reference
+    	else if (cmp > 0) { x.right = delete(key, x.right); }
+    	
+    	// found the key to be deleted (another recursion base case)
+    	else {
+    		System.out.println("Deleted key: " + x.key);
+    		
+    		// 1. if the node has just one link then delete() is like ~ deleteMin() or deleteMax()
+    		if (x.left == null) { return x.right; } // return right subtree (not null)
+    		if (x.right == null) { return x.left; } // return left subtree (not null)
+    		
+    		// 2. store a reference to the node that will be deleted (this one)
+    		Node delNode = x;    		
+    		
+    		// 2. find delNode's successor (smallest key on delNode's right subtree)
+    		// x (current node) in the recursion becomes smallest key on the right subtree
+    		x = min(delNode.right);
+    		
+    		// 3. successor.right references deleteMin(delNode.right) 
+    		// deleteMin(delNode.right) returns => right subtree without this successor
+    		x.right = deleteMin(delNode.right);
+    		
+    		// 4. successor.left was null (min Node) so set it to delNode.left;
+    		x.left = delNode.left;    		
+    	}
+    	
+    	// here delNode still holds references to the BST and its parent references it
+		x.size = size(x.left) + size(x.right) + 1; // size update
+		
+		// return outside else is necessary for Java's function to have a return
+		return x;    	    	
+    }
+    
+    /**
+     * Performs a range query on the BST.
+     */
+    
+    
     
     /*
      * Convenience method that prints a tree. Prints each complete level KEYS.
@@ -325,6 +514,22 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         // System.out.println(bst.min());
         // System.out.println(bst.max());
 	
-        System.out.println(bst.floor("G"));
+        // floor, ceiling test
+        // System.out.println(bst.floor("G"));
+        // System.out.println(bst.ceiling("N"));
+        
+        // deleteMax, deleteMin tests
+        //  bst.deleteMin();
+        //  bst.deleteMax();
+        //  bst.deleteMax();
+        //  bst.deleteMax();
+        //  bst.deleteMax();
+        //  bst.deleteMin();
+        //  bst.deleteMin();
+        
+        // delete test
+        // bst.delete("H");
+        // bst.delete("M");
+        bst.printTree();
     }
 }
