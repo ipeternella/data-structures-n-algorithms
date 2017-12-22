@@ -9,7 +9,7 @@ Repository with data structures and algorithms coded in Java by me!
 * Singly linked list;
 * Doubly linked list.
 
-### Queues and Stacks
+### Queues, Stacks and Deques
 
 * Queue (implemented with a singly linked list);
 * Stack (implemented with a singly linked list);
@@ -20,12 +20,12 @@ Repository with data structures and algorithms coded in Java by me!
 
 Algorithms created for any array that implements the Comparable interface i.e. any Comparable[] arrayReference. 
 
-* Selection Sort
-* Insertion Sort
-* Merge Sort
-* Quick Sort
-* Heap Sort
+* Selection Sort;
+* Insertion Sort;
+* Merge Sort;
+* Quick Sort;
+* Heap Sort.
 
 ### Tree
 
-* Binary Search Tree (BST)
+* Binary Search Tree (BST).
