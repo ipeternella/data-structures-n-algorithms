@@ -18,10 +18,13 @@ Repository with data structures and algorithms coded in Java by me!
 
 ### Sorting Algorithms
 
+Algorithms designed to work with any arrays that implemente the Comparable Interface i.e. any Comparable[] arrayReference. 
+
 * Selection Sort
 * Insertion Sort
-* Merge sort
-* Heap sort
+* Merge Sort
+* Quick Sort
+* Heap Sort
 
 ### Tree
 
