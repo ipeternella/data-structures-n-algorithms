@@ -11,9 +11,10 @@ Repository with data structures and algorithms coded in Java by me!
 
 ### Queues and Stacks
 
-* Queue;
-* Stack;
-* Priority queue.
+* Queue (implemented with a singly linked list);
+* Stack (implemented with a singly linked list);
+* Deque (implemented with a doubly linked list);
+* Priority queue (implemented with a dynamic array).
 
 ### Sorting Algorithms
 
